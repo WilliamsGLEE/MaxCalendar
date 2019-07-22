@@ -2,10 +2,43 @@ package com.example.maxcalendar.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+
+import com.example.maxcalendar.util.Attrs;
+
+import org.joda.time.LocalDate;
+
+import java.util.List;
 
 public class WeekView extends CalendarView {
 
-    public WeekView(Context context, AttributeSet attrs) {
-        super(context);
+    public WeekView(Attrs attrs, Context context, LocalDate initDate, List<LocalDate> dates) {
+        super(attrs, context, initDate, dates);
     }
+
+    @Override
+    protected boolean isCurrentMonth(LocalDate thisDate, LocalDate initDate) {
+        return true;
+    }
+
+    @Override
+    protected void dealSingleClickDate(LocalDate clickDate) {
+        mCalendarPager.onClickThisMonthOrWeekDate(clickDate);
+    }
+
+    @Override
+    public LocalDate getFirstDate() {
+        return mDateList.get(0);
+    }
+
+    @Override
+    public void onClick(View view) {
+        LocalDate clickDate = getClickDate();
+        if (clickDate == null) {
+            return;
+        }
+        dealSingleClickDate(clickDate);
+    }
+
+
 }

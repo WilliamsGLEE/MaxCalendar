@@ -1,6 +1,7 @@
 package com.example.maxcalendar.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -10,16 +11,19 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.example.maxcalendar.R;
+import com.example.maxcalendar.util.DateUtil;
 import com.orhanobut.logger.Logger;
 
 public class WeekBarView extends AppCompatTextView {
 
-    private static String[] mWeekChars = {"日", "一", "二", "三", "四", "五", "六"};
+    private static String[] mWeekChars;
     private TextPaint mTextPaint;
 
     public WeekBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        mWeekChars = DateUtil.getWeekbarString(context);
         mTextPaint = getPaint();
         // 居中对齐
         mTextPaint.setTextAlign(Paint.Align.CENTER);
@@ -42,10 +46,7 @@ public class WeekBarView extends AppCompatTextView {
             // 每个字体的矩形
             Rect rect = new Rect(paddingLeft + (width / mWeekChars.length * i), paddingTop, paddingLeft + (width / mWeekChars.length * (i + 1)), paddingBottom + height);
 
-            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-
-            Logger.d("rect.centerY() : " + rect.centerY());
-            Logger.d("rect.centerX() : " + rect.centerX());
+            Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();;
 
             // 解释 ：https://www.jianshu.com/p/8b97627b21c4
             float distance = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;   // 基于基线

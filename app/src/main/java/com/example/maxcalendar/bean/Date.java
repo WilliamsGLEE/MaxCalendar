@@ -6,6 +6,10 @@ public class Date {
 
     public LocalDate mLocalDate;
     public LunarDate mLunarDate;
+    public String solarHoliday;//公历节日
+    public String lunarHoliday;//农历节日
+    public String solarTerm;//节气
+
 
     public LocalDate getLocalDate() {
         return mLocalDate;
@@ -15,11 +19,11 @@ public class Date {
         this.mLocalDate = mLocalDate;
     }
 
-    public com.example.maxcalendar.bean.LunarDate getLunarDate() {
+    public LunarDate getLunarDate() {
         return mLunarDate;
     }
 
-    public void setLunarDate(com.example.maxcalendar.bean.LunarDate lunarDate) {
+    public void setLunarDate(LunarDate lunarDate) {
         mLunarDate = lunarDate;
     }
 }

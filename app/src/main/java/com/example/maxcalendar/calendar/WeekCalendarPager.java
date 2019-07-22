@@ -1,22 +1,66 @@
 package com.example.maxcalendar.calendar;
 
 import android.content.Context;
+import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.maxcalendar.adapter.BaseCalendarAdapter;
+import com.example.maxcalendar.adapter.WeekCalendarAdapter;
 import com.example.maxcalendar.painter.IPainter;
+import com.example.maxcalendar.util.Attrs;
+import com.example.maxcalendar.util.DateUtil;
 
 import org.joda.time.LocalDate;
 
 public class WeekCalendarPager extends CalendarPager {
 
-    public WeekCalendarPager(@NonNull Context context, IPainter iPainter) {
-        super(context, iPainter);
+    public WeekCalendarPager(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public WeekCalendarPager(@NonNull Context context, Attrs attrs, IPainter iPainter) {
+        super(context, attrs, iPainter);
     }
 
     @Override
-    protected BaseCalendarAdapter getCalendarAdapter(Context context, LocalDate initDate) {
-        return null;
+    protected void init(Context context) {
+        this.mContext = context;
+        mInitDate = new LocalDate();
+
+        addOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                drawView(position, true, null);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
+    @Override
+    protected BaseCalendarAdapter getCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate) {
+        return new WeekCalendarAdapter(attrs, context, startDate, endDate, initDate);
+    }
+
+    @Override
+    protected int getIntervalTwoDates(LocalDate currDate, LocalDate jumpDate) {
+        return DateUtil.getIntervalWeeks(currDate, jumpDate);
+    }
+
+    @Override
+    protected LocalDate getIntervalDate(LocalDate localDate, int count) {
+        return localDate.plusWeeks(count);
+    }
+
+
 }

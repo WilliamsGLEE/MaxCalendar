@@ -2,9 +2,6 @@ package com.example.maxcalendar.dao;
 
 import android.content.Context;
 
-//import com.example.maxcalendar.bean.DaoMaster;
-//import com.example.maxcalendar.bean.DaoSession;
-
 import com.example.maxcalendar.bean.DaoMaster;
 import com.example.maxcalendar.bean.DaoSession;
 

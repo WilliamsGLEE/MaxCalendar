@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MaxCalendar</string>
+    <string name="app_name">Max日历</string>
 
     <string name="MON">一</string>
     <string name="THE">二</string>

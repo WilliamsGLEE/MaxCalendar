@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MaxCalendar</string>
+    <string name="MON">MON</string>
+    <string name="THE">THE</string>
+    <string name="WED">WED</string>
+    <string name="THR">THR</string>
+    <string name="FRI">FRI</string>
+    <string name="STU">STU</string>
+    <string name="SUN">SUN</string>
+
+</resources>

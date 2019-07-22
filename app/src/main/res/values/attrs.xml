@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaxCalendar">
+        <attr name="startDate" format="string"/>
+        <attr name="endDate" format="string"/>
+
+        <attr name="mItemHeight" format="integer"/>
+        <attr name="numberStrokeWidth" format="float"/>
+        <attr name="lunarStrokeWidth" format="float"/>
+        <attr name="lunarDistance" format="float"/>
+        <attr name="itemRectPadding" format="integer"/>
+
+        <attr name="todayTextColor" format="integer"/>
+        <attr name="thisMonthTextColor" format="integer"/>
+        <attr name="notThisMonthTextColor" format="integer"/>
+        <attr name="selectBackgroundColor" format="integer"/>
+
+        <attr name="calendarDateNumberSize" format="integer"/>
+        <attr name="calendarDateLunarTextSize" format="integer"/>
+
+        <attr name="animatorDuration" format="integer"/>
+    </declare-styleable>
+</resources>
