@@ -28,9 +28,6 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
     protected View mFooterView;
     protected View mNoneView;
 
-
-    //FooterView的get和set函数
-
     public View getFooterView() {
         return mFooterView;
     }
@@ -107,7 +104,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
 
         public BaseRvHolder(View itemView) {
             super(itemView);
-            //如果是footerView,设置点击事件，不 bind。
+            // 如果是footerView,设置点击事件，不 bind。
             if (itemView == mFooterView) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -120,7 +117,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
             } else if (itemView == mNoneView) {
 
             } else {
-                //这里的ButterKnife的bind要放在最后，否则报错
+                // 这里的ButterKnife的bind要放在最后，否则报错
                 ButterKnife.bind(this, itemView);
                 itemView.setOnClickListener(this);
                 itemView.setOnLongClickListener(this);

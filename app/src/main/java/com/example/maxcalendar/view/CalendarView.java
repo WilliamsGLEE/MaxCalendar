@@ -112,9 +112,7 @@ public abstract class CalendarView extends View implements View.OnClickListener 
         return null;
     }
 
-    /**
-     *  获取每个元素矩形
-     */
+    // 获取每个元素矩形
     private Rect getRect(int row, int column) {
         this.mItemWidth = getMeasuredWidth() / 7;
         return new Rect(mItemWidth * column, mItemHeight * row, mItemWidth * (column + 1), mItemHeight * (row + 1));
