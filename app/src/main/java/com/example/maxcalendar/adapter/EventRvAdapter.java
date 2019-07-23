@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.maxcalendar.R;
 
-public class CalendarRecyclerViewAdapter extends RecyclerView.Adapter<CalendarRecyclerViewAdapter.MyViewHolder> {
+public class EventRvAdapter extends RecyclerView.Adapter<EventRvAdapter.MyViewHolder> {
 
     private Context context;
 
-    public CalendarRecyclerViewAdapter(Context context) {
+    public EventRvAdapter(Context context) {
         this.context = context;
     }
 

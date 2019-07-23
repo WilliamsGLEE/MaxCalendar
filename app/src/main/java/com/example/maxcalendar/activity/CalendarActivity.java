@@ -1,8 +1,6 @@
 package com.example.maxcalendar.activity;
 
 import android.os.Bundle;
-import android.os.Looper;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -11,18 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.maxcalendar.R;
-import com.example.maxcalendar.adapter.CalendarRecyclerViewAdapter;
-import com.example.maxcalendar.bean.DailyTask;
+import com.example.maxcalendar.adapter.EventRvAdapter;
 import com.example.maxcalendar.calendar.CalendarLayout;
-import com.example.maxcalendar.dao.TaskDaoUtil;
 import com.example.maxcalendar.listener.OnCalendarSelectedChangedListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,7 +53,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setNestedScrollingEnabled(false);
-        CalendarRecyclerViewAdapter adapter = new CalendarRecyclerViewAdapter(this);
+        EventRvAdapter adapter = new EventRvAdapter(this);
         recyclerView.setAdapter(adapter);
     }
 }
