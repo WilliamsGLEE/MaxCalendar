@@ -56,9 +56,7 @@ public abstract class BaseCalendarAdapter extends PagerAdapter {
 
     protected abstract CalendarView getCalendarView(Attrs attrs, int position);
 
-    /**
-     * 当前页的位置
-     */
+    // 当前页的位置
     public int getCurrentPosition() {
         return mCrr;
     }
@@ -70,5 +68,4 @@ public abstract class BaseCalendarAdapter extends PagerAdapter {
     }
 
     public abstract int getIntervalCount(LocalDate startDate, LocalDate endDate);
-
 }

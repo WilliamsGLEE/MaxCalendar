@@ -6,7 +6,8 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.maxcalendar.calendar.CalendarPager;
+import com.example.maxcalendar.calendar.BaseCalendarPager;
+import com.example.maxcalendar.painter.IMWPainter;
 import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
@@ -19,7 +20,7 @@ import java.util.List;
 public abstract class CalendarView extends View implements View.OnClickListener {
 
     protected int mRowNum;    //行数
-    protected CalendarPager mCalendarPager;     //pager代码
+    protected BaseCalendarPager mBaseCalendarPager;     //pager代码
     protected List<LocalDate> mDateList;
     protected LocalDate mInitDate;
     protected int mItemWidth;
@@ -40,18 +41,15 @@ public abstract class CalendarView extends View implements View.OnClickListener 
 
     @Override
     protected void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
-
-        //pager代码
-        if (mCalendarPager == null) {
-            mCalendarPager = (CalendarPager) getParent();
+        if (mBaseCalendarPager == null) {
+            mBaseCalendarPager = (BaseCalendarPager) getParent();
         }
 
-        LocalDate startDate = mCalendarPager.getStartDate();
-        LocalDate endDate = mCalendarPager.getEndDate();
-        mSelectDate = mCalendarPager.getSelectedDate();
+        LocalDate startDate = mBaseCalendarPager.getStartDate();
+        LocalDate endDate = mBaseCalendarPager.getEndDate();
+        mSelectDate = mBaseCalendarPager.getSelectedDate();
 
-        IPainter painter = mCalendarPager.getCalendarPainter();
+        IMWPainter painter = mBaseCalendarPager.getCalendarPainter();
 
         mRectList.clear();
 

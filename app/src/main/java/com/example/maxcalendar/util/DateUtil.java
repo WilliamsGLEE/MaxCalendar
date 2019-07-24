@@ -112,8 +112,6 @@ public class DateUtil {
         return date1.getYear() == date2.getYear() && date1.getMonthOfYear() == date2.getMonthOfYear() && getFirstSundayOfWeek(date1).equals(getFirstSundayOfWeek(date2));
     }
 
-
-
     /**
      * 是不是今天
      */
@@ -152,7 +150,7 @@ public class DateUtil {
     }
 
     /**
-     * 获取某月(MonthView)的高度
+     * 获取某月(MonthView)的高度(在MonthCalendar中)
      */
     public static int getMonthHeight(LocalDate date, int itemHeight) {
 
@@ -167,6 +165,45 @@ public class DateUtil {
         int preDiff = weekdayOfFirstDayOfThisMonth % 7;
         int lastDiff = (6 - weekdayOfLastDayOfThisMonth) % 7;
         return (daysOfThisMonth + preDiff + lastDiff) / 7 * itemHeight;
+    }
+
+    /**
+     * 获取某月第一天离该周星期天的日期差
+     */
+    public static int getFirstDayOfMonthDiff(int year, int month) {
+        LocalDate localDate = new LocalDate(year, month, 1);
+        return localDate.getDayOfWeek() == 7 ? 0 : localDate.getDayOfWeek();
+    }
+
+    /**
+     * 获取某月的天数
+     */
+    public static int getMonthDaysCount(int year, int month) {
+        int count = 0;
+        if (month == 1 || month == 3 || month == 5 || month == 7
+                || month == 8 || month == 10 || month == 12) {
+            count = 31;
+        }
+
+        if (month == 4 || month == 6 || month == 9 || month == 11) {
+            count = 30;
+        }
+
+        if (month == 2) {
+            if (isLeapYear(year)) {
+                count = 29;
+            } else {
+                count = 28;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 是否是闰年
+     */
+    private static boolean isLeapYear(int year) {
+        return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
     }
 
     public static String[] getWeekbarString(Context context) {

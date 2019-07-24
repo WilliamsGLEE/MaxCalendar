@@ -17,7 +17,7 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 
-public class WeekCalendarAdapter extends BaseCalendarAdapter {
+public class WeekCalendarAdapter extends com.example.maxcalendar.adapter.BaseCalendarAdapter {
 
     public WeekCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate) {
         super(attrs, context, startDate, endDate, initDate);
@@ -26,9 +26,6 @@ public class WeekCalendarAdapter extends BaseCalendarAdapter {
     @Override
     protected CalendarView getCalendarView(Attrs attrs, int position) {
         LocalDate localDate = mInitDate.plusDays((position - mCrr) * 7);        // 周日期：*7
-
-        Logger.d("TTTTTESTTTTT : position : " + position);
-
         List<LocalDate> dateList = DateUtil.getWeekDates(localDate);
         return new WeekView(attrs, mContext, localDate, dateList);
     }

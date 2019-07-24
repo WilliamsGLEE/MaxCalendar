@@ -12,17 +12,20 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.core.view.NestedScrollingParent;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.maxcalendar.R;
 import com.example.maxcalendar.listener.OnCalendarSelectedChangedListener;
 import com.example.maxcalendar.listener.OnEndAnimatorListener;
 import com.example.maxcalendar.listener.OnMWDateChangeListener;
 import com.example.maxcalendar.listener.OnMonthCalendarScrolledListener;
-import com.example.maxcalendar.painter.CalendarPainter;
+import com.example.maxcalendar.painter.IMWPainter;
+import com.example.maxcalendar.painter.MWCalendarPainter;
 import com.example.maxcalendar.painter.IPainter;
+import com.example.maxcalendar.painter.YCalendarPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.AttrsUtil;
 import com.example.maxcalendar.util.DateUtil;
-import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
 
@@ -30,7 +33,9 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
 
     private MonthCalendarPager mMCalendarPager;
     private WeekCalendarPager mWCalendarPager;
-    private IPainter mIPainter;
+    private YearCalendarPager mYCalendarPager;
+    private IMWPainter mIMWPainter;         // 月和周的绘制器
+    //    private YCalendarPainter mYCalendarPainter;
     protected Attrs mAttrs;
     private ViewGroup mContentView;
     private boolean isInflateFinish;    // 是否加载完成
@@ -38,9 +43,9 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
     protected Rect monthRect;   // 月日历大小的矩形
     protected Rect weekRect;    // 周日历大小的矩形 ，用于判断点击事件是否在日历的范围内
 
-    int STATE_MONTH = 1;
-    int STATE_WEEK = 0;
-    int STATE = STATE_MONTH;
+    private final int STATE_MONTH = 1;
+    private final int STATE_WEEK = 0;
+    private int STATE = STATE_MONTH;
 
     protected ValueAnimator monthValueAnimator;     // 月日历动画和子View动画，用于竖直拖动的中途复原
     protected ValueAnimator childViewValueAnimator;
@@ -50,8 +55,16 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
 
     private boolean isFirstLayout = true;
     private boolean adjustY = false;        // 解决周日历下滑粘连以及不能复原的问题（autoScroll第三种情况）
+    private boolean isSelectDifHeightMonInWeek = false;
 
     private boolean isSelectDifMonthInDate = false;     // 是否在周模式下切换月份
+
+    // 滑动逻辑
+    private int downY;
+    private int downX;
+    private int lastY;                  // 上次的y
+    private int verticalY = 50;         // 竖直方向上滑动的临界值，大于这个值认为是竖直滑动
+    private boolean isFirstScroll = true;           // 第一次手势滑动
 
     public CalendarLayout(Context context) {
         this(context, null);
@@ -65,21 +78,45 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         super(context, attrs, defStyleAttr);
 
         this.mAttrs = AttrsUtil.getAttrs(context, attrs);
-        mIPainter = new CalendarPainter(context, mAttrs);
+        mIMWPainter = new MWCalendarPainter(context, mAttrs);
+//        mYCalendarPainter = new YCalendarPainter(context, mAttrs);
 
-        mMCalendarPager = new MonthCalendarPager(context, this.mAttrs, mIPainter);
-        mWCalendarPager = new WeekCalendarPager(context, this.mAttrs, mIPainter);
+        mMCalendarPager = new MonthCalendarPager(context, this.mAttrs, mIMWPainter);
+        mWCalendarPager = new WeekCalendarPager(context, this.mAttrs, mIMWPainter);
+//        mYCalendarPager = new YearCalendarPager(context, this.mAttrs, mYCalendarPainter);
+
+        // TODO mYCalendarPager...
+
+//        mYCalendarPager = (YearCalendarPager) findViewById(R.id.yearPager_activity_calendar);
+//        mYCalendarPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
 
         mMCalendarPager.setOnMWDateChangeListener(onMWDateChangeListener);
         mWCalendarPager.setOnMWDateChangeListener(onMWDateChangeListener);
 
         addView(mMCalendarPager, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         addView(mWCalendarPager, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        addView(mYCalendarPager, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         weekHeight = mAttrs.mItemHeight;
 
         mMCalendarPager.setVisibility(VISIBLE);
         mWCalendarPager.setVisibility(INVISIBLE);
+//        mYCalendarPager.setVisibility(INVISIBLE);
 
         monthValueAnimator = new ValueAnimator();
         monthValueAnimator.setDuration(mAttrs.animatorDuration);
@@ -121,7 +158,11 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
 
         mWCalendarPager.layout(0 + paddingLeft, 0, measuredWidth - paddingRight, weekHeight);
         mMCalendarPager.layout(0 + paddingLeft, 0, measuredWidth - paddingRight, monthHeight);
-        mContentView.layout(0 + paddingLeft, monthHeight, measuredWidth - paddingRight, mContentView.getMeasuredHeight() + monthHeight);
+
+        if (!isSelectDifHeightMonInWeek) {        // 周模式下选择另外一个高度不同的月，不同的monthHeight会导致mContentView的layout高度不同，要通过gestureMove来设置才能流畅滑动
+            mContentView.layout(0 + paddingLeft, monthHeight, measuredWidth - paddingRight, mContentView.getMeasuredHeight() + monthHeight);
+            isSelectDifHeightMonInWeek = false;
+        }
     }
 
     @Override
@@ -133,6 +174,9 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
                 mContentView.bringToFront();
             }
         }
+        mYCalendarPager = (YearCalendarPager) findViewById(R.id.yearPager_activity_calendar);
+
+
         super.onFinishInflate();
     }
 
@@ -152,12 +196,6 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         mMCalendarPager.setMonthCalendarScrollListener(listener);
     }
 
-    private int dowmY;
-    private int downX;
-    private int lastY;      // 上次的y
-    private int verticalY = 50;         // 竖直方向上滑动的临界值，大于这个值认为是竖直滑动
-    private boolean isFirstScroll = true;           // 第一次手势滑动
-
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (!isInflateFinish) {
@@ -165,16 +203,16 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         }
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                dowmY = (int) ev.getY();
+                downY = (int) ev.getY();
                 downX = (int) ev.getX();
-                lastY = dowmY;
+                lastY = downY;
                 break;
             case MotionEvent.ACTION_MOVE:
                 int y = (int) ev.getY();
-                int absY = Math.abs(dowmY - y);
-                boolean inCalendar = isInCalendar(downX, dowmY);
+                int absY = Math.abs(downY - y);
+                boolean inCalendar = isInCalendar(downX, downY);
 
-                adjustY = (dowmY - y) < 0;
+                adjustY = (downY - y) < 0;
 
                 if (absY > verticalY && inCalendar) {           // 处理在Calendar范围内而且方向是Y的事件
                     return true;                // 拦截，交给onTouchEvent处理
@@ -270,7 +308,7 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         }
     }
 
-    //自动滑动到周
+    // 自动滑动到周
     private void autoToWeekState() {
         float monthCalendarStart = mMCalendarPager.getY();  // 起始位置
         float monthCalendarEnd = getMonthCalendarAutoWeekEndY();
@@ -284,7 +322,7 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         childViewValueAnimator.start();
     }
 
-    //自动滑动到月
+    // 自动滑动到月
     private void autoToMonthState() {
         float monthCalendarStart = mMCalendarPager.getY();  // 起始位置
         float monthCalendarEnd = 0;
@@ -307,16 +345,18 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
             mMCalendarPager.setY(-getGestureMonthUpOffset(dy) + monthCalendarY);
             mContentView.setY(-getGestureChildUpOffset(dy) + childLayoutY);         // 900.0 -> 197.0 变正常，说明错误不在此
             if (consumed != null) consumed[1] = dy;
+
         } else if (dy < 0 && !isChildMonthState() && !mContentView.canScrollVertically(-1)) {        // 下滑
             mMCalendarPager.setY((int) getGestureMonthDownOffset(dy) + (int) monthCalendarY);
             mContentView.setY((int) getGestureChildDownOffset(dy) + (int) childLayoutY);
             if (consumed != null) consumed[1] = dy;     // 如果是下滑且内部View已经无法继续下拉，则消耗掉dy
+
         }
         setWeekVisible();
     }
 
     protected void ScrolledMoveContent(int dy) {
-        if (!isSelectDifMonthInDate) {                  // 解决周视图切换月时产生的闪屏问题
+        if (!isSelectDifMonthInDate) {                  // 解决周视图切换月时产生的闪屏问题：
             mContentView.setY(dy);
             isSelectDifMonthInDate = false;
         }
@@ -347,13 +387,13 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         public void onAnimationEnd(Animator animation) {
             super.onAnimationEnd(animation);
             if (animation == childViewValueAnimator) {
-                setCalenadrState();
+                setCalendarState();
             }
         }
     };
 
     //设置日历的状态、月周的显示及状态回调
-    private void setCalenadrState() {
+    private void setCalendarState() {
         if (isMonthCalendarWeekState() && isChildWeekState() && STATE == STATE_MONTH) {
             STATE = STATE_WEEK;
             mWCalendarPager.setVisibility(VISIBLE);
@@ -367,12 +407,12 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         }
     }
 
-    //月日历周状态
+    // 月日历周状态
     protected boolean isMonthCalendarWeekState() {
         return mMCalendarPager.getY() <= -mMCalendarPager.getPivotDistanceFromTop();
     }
 
-    //月日历月状态
+    // 月日历月状态
     protected boolean isMonthCalendarMonthState() {
         return mMCalendarPager.getY() >= 0;
     }
@@ -455,9 +495,9 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
     @Override
     public void onStopNestedScroll(View target) {
         if (!adjustY && isMonthCalendarMonthState() && isChildMonthState() && STATE == STATE_WEEK) {
-            setCalenadrState();
+            setCalendarState();
         } else if (isMonthCalendarWeekState() && isChildWeekState() && STATE == STATE_MONTH) {
-            setCalenadrState();
+            setCalendarState();
         } else if (!isChildMonthState() && !isChildWeekState()) {
             // 不是周状态也不是月状态时，自动滑动
             autoScroll();
@@ -495,14 +535,15 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
 
     private OnMWDateChangeListener onMWDateChangeListener = new OnMWDateChangeListener() {
         @Override
-        public void onMwDateChange(CalendarPager calendarPager, final LocalDate localDate) {
-            if (calendarPager == mMCalendarPager && STATE == STATE_MONTH) {
+        public void onMwDateChange(BaseCalendarPager baseCalendarPager, final LocalDate localDate) {
+            if (baseCalendarPager == mMCalendarPager && STATE == STATE_MONTH) {
                 // 月日历变化,改变周的选中
                 mWCalendarPager.jumpDate(localDate, false);
-            } else if (calendarPager == mWCalendarPager && STATE == STATE_WEEK) {
+            } else if (baseCalendarPager == mWCalendarPager && STATE == STATE_WEEK) {
 
                 if (!DateUtil.isEqualMonth(mMCalendarPager.getSelectedDate(), localDate)) {
                     isSelectDifMonthInDate = true;
+                    isSelectDifHeightMonInWeek = true;
                 }
                 mMCalendarPager.jumpDate(localDate, false);     // 周日历变化，改变月的选中
                 mMCalendarPager.post(new Runnable() {
@@ -514,6 +555,12 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
             }
         }
     };
+
+    public void showYearPager() {
+        mYCalendarPager.setVisibility(VISIBLE);     // nop
+        mMCalendarPager.setVisibility(GONE);
+        mWCalendarPager.setVisibility(GONE);
+    }
 
     public LocalDate getSelectDate() {
         return mMCalendarPager.getSelectedDate();

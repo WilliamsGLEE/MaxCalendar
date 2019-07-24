@@ -3,22 +3,20 @@ package com.example.maxcalendar.calendar;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.maxcalendar.adapter.BaseCalendarAdapter;
 import com.example.maxcalendar.adapter.MonthCalendarAdapter;
+import com.example.maxcalendar.painter.IMWPainter;
 import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
-import com.example.maxcalendar.view.MonthView;
-import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
 
-public class MonthCalendarPager extends CalendarPager {
+public class MonthCalendarPager extends com.example.maxcalendar.calendar.BaseCalendarPager {
 
     private int mPreMonthHeight, mNextMonthHeight, mCurrMonthHeight;
 
@@ -26,8 +24,8 @@ public class MonthCalendarPager extends CalendarPager {
         super(context, attrs);
     }
 
-    public MonthCalendarPager(@NonNull Context context, Attrs attrs, IPainter iPainter) {
-        super(context, attrs, iPainter);
+    public MonthCalendarPager(@NonNull Context context, Attrs attrs, IMWPainter imwPainter) {
+        super(context, attrs, imwPainter);
     }
 
     @Override
@@ -37,8 +35,8 @@ public class MonthCalendarPager extends CalendarPager {
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         layoutParams.height = mCurrMonthHeight;
 
-        if (getParent() != null && getParent() instanceof CalendarLayout) {
-            mCalendarLayout = (CalendarLayout) getParent();
+        if (getParent() != null && getParent() instanceof com.example.maxcalendar.calendar.CalendarLayout) {
+            mCalendarLayout = (com.example.maxcalendar.calendar.CalendarLayout) getParent();
         }
 
         addOnPageChangeListener(new OnPageChangeListener() {

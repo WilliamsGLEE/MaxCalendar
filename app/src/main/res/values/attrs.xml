@@ -9,15 +9,24 @@
         <attr name="lunarStrokeWidth" format="float"/>
         <attr name="lunarDistance" format="float"/>
         <attr name="itemRectPadding" format="integer"/>
+        <attr name="yearViewDayStrokeWidth" format="float"/>
 
         <attr name="todayTextColor" format="integer"/>
         <attr name="thisMonthTextColor" format="integer"/>
         <attr name="notThisMonthTextColor" format="integer"/>
         <attr name="selectBackgroundColor" format="integer"/>
+        <attr name="yearViewDayTextColor" format="integer"/>
+        <attr name="yearViewMonthTextColor" format="integer"/>
+        <attr name="yearViewDaySchemeTextColor" format="integer"/>
 
         <attr name="calendarDateNumberSize" format="integer"/>
         <attr name="calendarDateLunarTextSize" format="integer"/>
+        <attr name="yearViewDayTextSize" format="integer"/>
 
         <attr name="animatorDuration" format="integer"/>
+
+        <attr name="yearViewRvColumns" format="integer"/>
+        <attr name="yearViewRvRows" format="integer"/>
+
     </declare-styleable>
 </resources>

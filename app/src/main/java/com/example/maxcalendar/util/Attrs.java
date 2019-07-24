@@ -12,16 +12,24 @@ public class Attrs {
     public float lunarStrokeWidth;
     public float lunarDistance;
     public int itemRectPadding;
+    public float yearViewDayStrokeWidth;
 
     public int todayTextColor;
     public int thisMonthTextColor;
     public int notThisMonthTextColor;
     public int selectBackgroundColor;
+    public int yearViewDayTextColor;
+    public int yearViewMonthTextColor;
+    public int yearViewDaySchemeTextColor;
 
     public int calendarDateNumberSize;
     public int calendarDateLunarTextSize;
+    public int yearViewDayTextSize;
 
     public LocalDate mIndexDate;    // 标记日期
+
+    public int yearViewRvColumns;    // 年模式列数
+    public int yearViewRvRows;
 
     public int animatorDuration;
 }

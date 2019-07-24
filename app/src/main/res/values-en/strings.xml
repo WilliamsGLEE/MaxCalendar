@@ -9,4 +9,7 @@
     <string name="STU">STU</string>
     <string name="SUN">SUN</string>
 
+    <string name="monthString">Month</string>
+    <string name="dayString">Day</string>
+
 </resources>

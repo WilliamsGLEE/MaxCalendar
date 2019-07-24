@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp">
 
         <TextView
-            android:id="@+id/tv_activity_calendar"
+            android:id="@+id/tv_monthandday_activity_calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -28,15 +28,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tv_activity_calendar"
-            android:layout_toRightOf="@id/tv_activity_calendar"
-            android:layout_alignTop="@id/tv_activity_calendar"
-            android:layout_alignBottom="@id/tv_activity_calendar"
+            android:layout_toEndOf="@id/tv_monthandday_activity_calendar"
+            android:layout_toRightOf="@id/tv_monthandday_activity_calendar"
+            android:layout_alignTop="@id/tv_monthandday_activity_calendar"
+            android:layout_alignBottom="@id/tv_monthandday_activity_calendar"
             android:orientation="vertical"
             android:layout_marginStart="7dp"
             android:layout_marginLeft="7dp">
 
             <TextView
+                android:id="@+id/tv_year_activity_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text="2019"
@@ -46,6 +47,7 @@
                 android:textSize="11sp"/>
 
             <TextView
+                android:id="@+id/tv_lunar_activity_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -103,6 +105,16 @@
         </androidx.recyclerview.widget.RecyclerView>
 
     </com.example.maxcalendar.calendar.CalendarLayout>
+
+    <com.example.maxhubcalendar.calendar.YearCalendarPager
+        android:id="@+id/yearPager_activity_calendar"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+
+    </com.example.maxhubcalendar.calendar.YearCalendarPager>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_activity_calendar"

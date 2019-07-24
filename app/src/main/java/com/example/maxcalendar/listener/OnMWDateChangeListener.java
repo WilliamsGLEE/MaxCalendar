@@ -1,6 +1,6 @@
 package com.example.maxcalendar.listener;
 
-import com.example.maxcalendar.calendar.CalendarPager;
+import com.example.maxcalendar.calendar.BaseCalendarPager;
 
 import org.joda.time.LocalDate;
 
@@ -9,5 +9,5 @@ import org.joda.time.LocalDate;
  */
 public interface OnMWDateChangeListener {
 
-    void onMwDateChange(CalendarPager calendarPager, LocalDate localDate);
+    void onMwDateChange(BaseCalendarPager baseCalendarPager, LocalDate localDate);
 }

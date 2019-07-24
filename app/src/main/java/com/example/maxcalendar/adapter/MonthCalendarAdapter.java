@@ -16,9 +16,7 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 
-import butterknife.internal.Utils;
-
-public class MonthCalendarAdapter extends BaseCalendarAdapter {
+public class MonthCalendarAdapter extends com.example.maxcalendar.adapter.BaseCalendarAdapter {
 
     public MonthCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate) {
         super(attrs, context, startDate, endDate, initDate);

@@ -66,6 +66,21 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
         }
     }
 
+    // 添加单个数据
+    public void addItem(T item) {
+        if (item != null) {
+            mDataList.add(item);
+            notifyItemChanged(mDataList.size());
+        }
+    }
+
+    public T getItem(int position) {
+        if (!(position < 0 || position > mDataList.size())) {
+            return mDataList.get(position);
+        }
+        return null;
+    }
+
     // 判断item的类型，从而绑定不同的view
     @Override
     public int getItemViewType(int position) {
@@ -117,7 +132,6 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
             } else if (itemView == mNoneView) {
 
             } else {
-                // 这里的ButterKnife的bind要放在最后，否则报错
                 ButterKnife.bind(this, itemView);
                 itemView.setOnClickListener(this);
                 itemView.setOnLongClickListener(this);
@@ -146,15 +160,15 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
 
 //public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
 //
-//    protected List<T> mItemList;
+//    protected List<T> mDataList;
 //    protected Context mContext;
-//    protected OnRvItemClickListener mOnRvItemClickListener;
+//    protected OnMonthSelectedListener mOnRvItemClickListener;
 //    private OnClickListener mOnClickListener;
 //
 //
 //    public BaseRvAdapter(Context context) {
 //        this.mContext = context;
-//        this.mItemList = new ArrayList<>();
+//        this.mDataList = new ArrayList<>();
 //
 //        mOnClickListener = new OnClickListener() {
 //            @Override
@@ -179,34 +193,34 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
 //    public abstract RecyclerView.ViewHolder createDefViewHolder(ViewGroup parent, int viewType);
 //
 //
-//    public void setOnItemClickListener(OnRvItemClickListener onRvItemClickListener) {
+//    public void setOnItemClickListener(OnMonthSelectedListener onRvItemClickListener) {
 //        this.mOnRvItemClickListener = onRvItemClickListener;
 //    }
 //
 //    public void addItem(T item) {
 //        if (item != null) {
-//            mItemList.add(item);
-//            notifyItemChanged(mItemList.size());
+//            mDataList.add(item);
+//            notifyItemChanged(mDataList.size());
 //        }
 //    }
 //
 //    public void setItemList(List<T> itemList) {
 //        if (itemList != null) {
-//            mItemList.addAll(itemList);
+//            mDataList.addAll(itemList);
 //            notifyDataSetChanged();
 //        }
 //    }
 //
 //    public T getItem(int position) {
-//        if (!(position < 0 || position > mItemList.size())) {
-//            return mItemList.get(position);
+//        if (!(position < 0 || position > mDataList.size())) {
+//            return mDataList.get(position);
 //        }
 //        return null;
 //    }
 //
 //    @Override
 //    public int getItemCount() {
-//        return mItemList.size();
+//        return mDataList.size();
 //    }
 //
 //    static abstract class OnClickListener implements View.OnClickListener {

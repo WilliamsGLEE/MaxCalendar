@@ -1,7 +1,6 @@
 package com.example.maxcalendar.view;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.maxcalendar.util.Attrs;
@@ -10,7 +9,7 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 
-public class WeekView extends CalendarView {
+public class WeekView extends com.example.maxcalendar.view.CalendarView {
 
     public WeekView(Attrs attrs, Context context, LocalDate initDate, List<LocalDate> dates) {
         super(attrs, context, initDate, dates);
@@ -23,7 +22,7 @@ public class WeekView extends CalendarView {
 
     @Override
     protected void dealSingleClickDate(LocalDate clickDate) {
-        mCalendarPager.onClickThisMonthOrWeekDate(clickDate);
+        mBaseCalendarPager.onClickThisMonthOrWeekDate(clickDate);
     }
 
     @Override
@@ -39,6 +38,4 @@ public class WeekView extends CalendarView {
         }
         dealSingleClickDate(clickDate);
     }
-
-
 }

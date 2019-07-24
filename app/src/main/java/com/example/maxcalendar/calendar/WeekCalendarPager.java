@@ -8,20 +8,21 @@ import androidx.annotation.Nullable;
 
 import com.example.maxcalendar.adapter.BaseCalendarAdapter;
 import com.example.maxcalendar.adapter.WeekCalendarAdapter;
+import com.example.maxcalendar.painter.IMWPainter;
 import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
 
 import org.joda.time.LocalDate;
 
-public class WeekCalendarPager extends CalendarPager {
+public class WeekCalendarPager extends com.example.maxcalendar.calendar.BaseCalendarPager {
 
     public WeekCalendarPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public WeekCalendarPager(@NonNull Context context, Attrs attrs, IPainter iPainter) {
-        super(context, attrs, iPainter);
+    public WeekCalendarPager(@NonNull Context context, Attrs attrs, IMWPainter imwPainter) {
+        super(context, attrs, imwPainter);
     }
 
     @Override

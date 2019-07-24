@@ -1,6 +1,7 @@
 package com.example.maxcalendar.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,9 +24,11 @@ import butterknife.OnClick;
 public class CalendarActivity extends AppCompatActivity {
 
     @BindView(R.id.calendarLayout_activity_calendar) CalendarLayout calendarLayout;
-    //    @BindView(R.id.tv_activity_calendar) TextView tv_activity_calendar;
     @BindView(R.id.rv_activity_calendar) RecyclerView recyclerView;
     @BindView(R.id.fab_activity_calendar) FloatingActionButton fab;
+    @BindView(R.id.tv_monthandday_activity_calendar) TextView dateTextView;
+    @BindView(R.id.tv_year_activity_calendar) TextView yearTextView;
+    @BindView(R.id.tv_lunar_activity_calendar) TextView lunarTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,14 +43,19 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onClickFAB() {
         LocalDate selectedDate = calendarLayout.getSelectDate();
         Toast.makeText(this, selectedDate.toString(), Toast.LENGTH_SHORT).show();
+
+
     }
 
     protected void init() {
         calendarLayout.setCalendarSelectedListener(new OnCalendarSelectedChangedListener() {
             @Override
             public void onCalendarSelected(LocalDate localDate) {
-//                tv_activity_calendar.setText(localDate.toString());
+//                tv_monthandday_activity_calendar.setText(localDate.toString());
 //                calendarLayout.setNewMonthHeight();
+                dateTextView.setText(localDate.getMonthOfYear() + R.string.monthString + localDate.getDayOfMonth() + R.string.dayString);
+                yearTextView.setText(localDate.getYear());
+                lunarTextView.setText("农历");
             }
         });
 

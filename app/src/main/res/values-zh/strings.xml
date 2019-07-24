@@ -10,4 +10,7 @@
     <string name="STU">六</string>
     <string name="SUN">日</string>
 
+    <string name="monthString">月</string>
+    <string name="dayString">日</string>
+
 </resources>

@@ -12,22 +12,22 @@ import com.example.maxcalendar.adapter.BaseCalendarAdapter;
 import com.example.maxcalendar.listener.OnCalendarSelectedChangedListener;
 import com.example.maxcalendar.listener.OnMWDateChangeListener;
 import com.example.maxcalendar.listener.OnMonthCalendarScrolledListener;
-import com.example.maxcalendar.painter.CalendarPainter;
+import com.example.maxcalendar.painter.IMWPainter;
+import com.example.maxcalendar.painter.MWCalendarPainter;
 import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.AttrsUtil;
 import com.example.maxcalendar.util.DateUtil;
 import com.example.maxcalendar.view.CalendarView;
-import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
 
 import java.util.List;
 
-public abstract class CalendarPager extends ViewPager implements ICalendar {
+public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
 
     protected Context mContext;
-    private IPainter mIPainter;
+    private IMWPainter mIMWPainter;
     protected BaseCalendarAdapter mBaseCalendarAdapter;
     protected LocalDate mInitDate;
     protected LocalDate mStartDate, mEndDate;
@@ -43,17 +43,17 @@ public abstract class CalendarPager extends ViewPager implements ICalendar {
     private OnMWDateChangeListener mOnMWDateChangeListener;     // 月周切换是折叠中心的回调
 
 
-    public CalendarPager(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public BaseCalendarPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.mAttrs = AttrsUtil.getAttrs(context, attrs);
-        this.mIPainter = new CalendarPainter(context, mAttrs);
+        this.mIMWPainter = new MWCalendarPainter(context, mAttrs);
         this.mContext = context;
     }
 
-    public CalendarPager(@NonNull Context context, Attrs attrs, IPainter iPainter) {
+    public BaseCalendarPager(@NonNull Context context, Attrs attrs, IMWPainter imwPainter) {
         super(context);
         this.mAttrs = attrs;
-        this.mIPainter = iPainter;
+        this.mIMWPainter = imwPainter;
         this.mContext = context;
     }
 
@@ -69,7 +69,7 @@ public abstract class CalendarPager extends ViewPager implements ICalendar {
     }
 
     @Override
-    protected void onAttachedToWindow() {
+    protected void onAttachedToWindow() {       // 当View附加到窗体时，也就是View和Window绑定时就会调用这个函数(onResume之后)
         super.onAttachedToWindow();
         if (getParent() != null && getParent() instanceof CalendarLayout) {
             mCalendarLayout = (CalendarLayout) getParent();
@@ -218,7 +218,7 @@ public abstract class CalendarPager extends ViewPager implements ICalendar {
                 }
 
                 if (mOnMWDateChangeListener != null) {
-                    mOnMWDateChangeListener.onMwDateChange(CalendarPager.this, mSelectedDate);
+                    mOnMWDateChangeListener.onMwDateChange(BaseCalendarPager.this, mSelectedDate);
                 }
             }
         });
@@ -261,9 +261,7 @@ public abstract class CalendarPager extends ViewPager implements ICalendar {
 
     protected abstract LocalDate getIntervalDate(LocalDate localDate, int count);
 
-    public IPainter getCalendarPainter() {
-        return mIPainter;
+    public IMWPainter getCalendarPainter() {
+        return mIMWPainter;
     }
-
-
 }

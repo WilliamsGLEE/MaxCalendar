@@ -12,19 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.maxcalendar.R;
 import com.example.maxcalendar.bean.Months;
+import com.example.maxcalendar.painter.IPainter;
+import com.example.maxcalendar.painter.YCalendarPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.view.YearView;
 
 import butterknife.BindView;
 
-public class YearRvAdapter extends BaseRvAdapter<Months> {
+public class YearRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapter<Months> {
 
     private int mItemHeight, mItemWidth;
     private Attrs mAttrs;
+    private YCalendarPainter mYCalendarPainter;
 
-    public YearRvAdapter(Context context, Attrs attrs) {
+    public YearRvAdapter(Context context, Attrs attrs, YCalendarPainter painter) {
 //        super(context);
         this.mAttrs = attrs;
+        this.mYCalendarPainter = painter;
     }
 
     public void setItemSize(int height, int width) {
@@ -49,23 +53,29 @@ public class YearRvAdapter extends BaseRvAdapter<Months> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Months month = mDataList.get(position);
+        if (holder instanceof YearViewRvHolder) {
+            ((YearViewRvHolder) holder).bindView(mDataList.get(position));
+        }
     }
 
     class YearViewRvHolder extends BaseRvHolder {
 
         @BindView(R.id.tv_item_rv_yearpager)
-        TextView textView;
+        TextView mTextView;
         @BindView(R.id.yearview_item_rv_yearpager)
-        YearView yearView;
+        YearView mYearView;
 
         YearViewRvHolder(@NonNull View itemView) {
             super(itemView);
         }
 
         @Override
-        protected void bindView(Months months) {
+        protected void bindView(Months month) {
 
+            mYearView.init(mAttrs, month);
+            mYearView.measureSize(mItemHeight, mItemWidth);
+            mYearView.setYearViewPainter(mYCalendarPainter);
+            mTextView.setText("一月");
         }
     }
 }

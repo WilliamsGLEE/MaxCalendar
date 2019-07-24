@@ -1,18 +1,16 @@
 package com.example.maxcalendar.view;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
-import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
 
 import java.util.List;
 
-public class MonthView extends CalendarView {
+public class MonthView extends com.example.maxcalendar.view.CalendarView {
 
     public MonthView(Attrs attrs, Context context, LocalDate initDate, List<LocalDate> dates) {
         super(attrs, context, initDate, dates);
@@ -26,11 +24,11 @@ public class MonthView extends CalendarView {
     @Override
     protected void dealSingleClickDate(LocalDate clickDate) {
         if (DateUtil.isLastMonth(clickDate, mInitDate)) {
-            mCalendarPager.onClickLastMonthDate(clickDate);
+            mBaseCalendarPager.onClickLastMonthDate(clickDate);
         } else if (DateUtil.isNextMonth(clickDate, mInitDate)) {
-            mCalendarPager.onClickNextMonthDate(clickDate);
+            mBaseCalendarPager.onClickNextMonthDate(clickDate);
         } else {
-            mCalendarPager.onClickThisMonthOrWeekDate(clickDate);
+            mBaseCalendarPager.onClickThisMonthOrWeekDate(clickDate);
         }
     }
 
