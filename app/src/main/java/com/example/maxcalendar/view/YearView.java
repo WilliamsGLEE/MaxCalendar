@@ -13,6 +13,7 @@ import com.example.maxcalendar.bean.Months;
 import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.painter.YCalendarPainter;
 import com.example.maxcalendar.util.Attrs;
+import com.orhanobut.logger.Logger;
 
 public class YearView extends View {
 
@@ -41,12 +42,20 @@ public class YearView extends View {
         this.mAttrs = attrs;
         this.currMonth = month;
 
+//        mItemWidth = (getWidth() - getPaddingLeft() - getPaddingRight()) / 7;
+//        mItemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / 6;
+//
+//        Logger.d("TTTTTESTTTTT : " + mItemWidth + " , " + mItemHeight);
+
         countLines();
     }
 
     public void measureSize(int height, int width) {
-        mItemWidth = width;
-        mItemHeight = height;
+//        mItemWidth = width;
+//        mItemHeight = height;
+
+//        mItemWidth = (getWidth() - getPaddingLeft() - getPaddingRight()) / 7;
+//        mItemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / 6;
     }
 
 
@@ -61,6 +70,12 @@ public class YearView extends View {
 //        YearRvView yearRvView = (YearRvView) getParent();
 //        IPainter painter = yearRvView.getYearViewPainter();
 
+        mItemWidth = (getWidth() - getPaddingLeft() - getPaddingRight()) / 7;
+        mItemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / 6;
+
+        Logger.d("TTTTTESTTTTT : " + mItemWidth + " , " + mItemHeight);
+
+
         Rect itemRect;
 
         int d = 1;
@@ -70,7 +85,6 @@ public class YearView extends View {
 
                     itemRect = getItemRect(i, (currMonth.getFirstDayDiff() + j));
                     mYCalendarPainter.drawYearViewDate(canvas, itemRect, d++, false);
-
 
 //                    ++d;
 //                    canvas.drawText(String.valueOf(j + 1), mDiff * w + j * w + pLeft + w / 2, h, isScheme(d) ? mSchemePaint : mPaint);
@@ -98,11 +112,6 @@ public class YearView extends View {
                     itemRect = getItemRect(i, j);
                     mYCalendarPainter.drawYearViewDate(canvas, itemRect, d++, false);
                 }
-
-
-
-
-
 //                int first = i * 7 - mDiff + 1;
 //                for (int j = 0; j < 7; j++) {
 //                    ++d;

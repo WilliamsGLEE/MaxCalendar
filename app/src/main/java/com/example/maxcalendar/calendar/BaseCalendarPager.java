@@ -119,10 +119,7 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
 
         currCalendarView.invalidate();
 
-        if (reSelect) {
-            callback(reSelect);
-        }
-
+        callback();
     }
 
     public void onClickLastMonthDate(LocalDate clickDate) {
@@ -166,7 +163,7 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
                 calendarView.invalidate();
             }
         }
-        callback(true);
+        callback();
     }
 
     // 获取当前月/周的第一个日期
@@ -186,7 +183,6 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         }
         return 0;
     }
-
 
     // PivotDate到顶部的距离
     public int getPivotDistanceFromTop() {
@@ -208,7 +204,7 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         // TODO : TOAST
     }
 
-    public void callback(boolean reSelect) {
+    public void callback() {
         post(new Runnable() {
             @Override
             public void run() {

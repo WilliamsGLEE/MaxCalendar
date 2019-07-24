@@ -28,7 +28,7 @@ public class AttrsUtil {
         attrs.lunarStrokeWidth = typedArray.getFloat(R.styleable.MaxCalendar_lunarStrokeWidth, 0.2f);
         attrs.lunarDistance = typedArray.getFloat(R.styleable.MaxCalendar_lunarDistance, 45f);
         attrs.itemRectPadding = typedArray.getInt(R.styleable.MaxCalendar_itemRectPadding, OtherUtil.dpToPx(context, 5));
-        attrs.yearViewDayStrokeWidth = typedArray.getFloat(R.styleable.MaxCalendar_yearViewDayStrokeWidth, 0.2f);
+        attrs.yearViewDayStrokeWidth = typedArray.getFloat(R.styleable.MaxCalendar_yearViewDayStrokeWidth, 0.3f);
 
         attrs.todayTextColor = typedArray.getInt(R.styleable.MaxCalendar_todayTextColor, context.getResources().getColor(R.color.red));  // 直接用R.color.red得到的值是负数
         attrs.thisMonthTextColor = typedArray.getInt(R.styleable.MaxCalendar_thisMonthTextColor, context.getResources().getColor(R.color.black));
@@ -40,7 +40,7 @@ public class AttrsUtil {
 
         attrs.calendarDateNumberSize = typedArray.getInt(R.styleable.MaxCalendar_calendarDateNumberSize, OtherUtil.dpToPx(context, 17));
         attrs.calendarDateLunarTextSize = typedArray.getInt(R.styleable.MaxCalendar_calendarDateLunarTextSize, OtherUtil.dpToPx(context, 8));
-        attrs.yearViewDayTextSize = typedArray.getInt(R.styleable.MaxCalendar_yearViewDayTextSize, OtherUtil.dpToPx(context, 5));
+        attrs.yearViewDayTextSize = typedArray.getInt(R.styleable.MaxCalendar_yearViewDayTextSize, OtherUtil.dpToPx(context, 6));
 
         attrs.animatorDuration = typedArray.getInt(R.styleable.MaxCalendar_animatorDuration, 240);
 

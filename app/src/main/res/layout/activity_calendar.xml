@@ -59,6 +59,7 @@
         </LinearLayout>
 
         <ImageButton
+            android:id="@+id/ibtn_backToday_activity_calendar"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:src="@drawable/ic_event_black_30dp"
@@ -70,11 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-
-
     </RelativeLayout>
-
-
 
     <com.example.maxcalendar.view.WeekBarView
         android:id="@+id/wbv_activity_calendar"
@@ -106,15 +103,21 @@
 
     </com.example.maxcalendar.calendar.CalendarLayout>
 
-    <com.example.maxhubcalendar.calendar.YearCalendarPager
+    <com.example.maxcalendar.calendar.YearCalendarPager
         android:id="@+id/yearPager_activity_calendar"
+        android:layout_below="@id/relativeLayout"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:visibility="gone">
 
-
-    </com.example.maxhubcalendar.calendar.YearCalendarPager>
+    </com.example.maxcalendar.calendar.YearCalendarPager>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_activity_calendar"

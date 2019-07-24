@@ -16,10 +16,11 @@ import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.painter.YCalendarPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.view.YearView;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 
-public class YearRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapter<Months> {
+public class YearRvAdapter extends BaseRvAdapter<Months> {
 
     private int mItemHeight, mItemWidth;
     private Attrs mAttrs;
@@ -54,6 +55,7 @@ public class YearRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapter
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof YearViewRvHolder) {
+            Logger.d("TTTTTTTESTTTTTTT : " + position);
             ((YearViewRvHolder) holder).bindView(mDataList.get(position));
         }
     }
@@ -72,10 +74,20 @@ public class YearRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapter
         @Override
         protected void bindView(Months month) {
 
-            mYearView.init(mAttrs, month);
-            mYearView.measureSize(mItemHeight, mItemWidth);
+
+//            mYearView.measureSize(mItemHeight, mItemWidth);
+            mYearView.getLayoutParams().height = mItemHeight;
+            mYearView.getLayoutParams().width = mItemWidth;     // ?
             mYearView.setYearViewPainter(mYCalendarPainter);
+
+            mYearView.init(mAttrs, month);
             mTextView.setText("一月");
+
+            Logger.d("TTTTTTTESTTTTTTT : " + mDataList.size() + " , " + month.getMonth() + " , " + mItemHeight);
         }
+    }
+
+    public void setItemHeight(int height) {
+        this.mItemHeight = height;
     }
 }

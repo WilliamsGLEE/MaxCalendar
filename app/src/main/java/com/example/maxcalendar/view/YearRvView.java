@@ -18,6 +18,7 @@ import com.example.maxcalendar.painter.YCalendarPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.AttrsUtil;
 import com.example.maxcalendar.util.DateUtil;
+import com.orhanobut.logger.Logger;
 
 public class YearRvView extends RecyclerView {
 
@@ -85,7 +86,6 @@ public class YearRvView extends RecyclerView {
         }
     }
 
-
     public IPainter getYearViewPainter() {
         return mYCalendarPainter;
     }
@@ -99,6 +99,10 @@ public class YearRvView extends RecyclerView {
         super.onMeasure(widthSpec, heightSpec);
         int height = MeasureSpec.getSize(heightSpec);
         int width = MeasureSpec.getSize(widthSpec);
-        mYearRvAdapter.setItemSize(height / mAttrs.yearViewRvRows, width / mAttrs.yearViewRvColumns);
+//        mYearRvAdapter.setItemSize(height / mAttrs.yearViewRvRows, width / mAttrs.yearViewRvColumns);
+//        mYearRvAdapter.setItemHeight(height / 4);
+        mYearRvAdapter.setItemSize(height / 5, width / 3);
+
+        Logger.d("TTTTTTESTTTTTT : " + height + " , " + width);
     }
 }

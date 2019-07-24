@@ -33,7 +33,7 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
 
     private MonthCalendarPager mMCalendarPager;
     private WeekCalendarPager mWCalendarPager;
-    private YearCalendarPager mYCalendarPager;
+//    private YearCalendarPager mYCalendarPager;
     private IMWPainter mIMWPainter;         // 月和周的绘制器
     //    private YCalendarPainter mYCalendarPainter;
     protected Attrs mAttrs;
@@ -174,10 +174,9 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
                 mContentView.bringToFront();
             }
         }
-        mYCalendarPager = (YearCalendarPager) findViewById(R.id.yearPager_activity_calendar);
-
-
         super.onFinishInflate();
+//        mYCalendarPager = (YearCalendarPager) findViewById(R.id.yearPager_activity_calendar);
+//        mYCalendarPager.init(mAttrs);
     }
 
     @Override
@@ -556,13 +555,21 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         }
     };
 
+    public void jumptoADate(LocalDate localDate) {
+        
+    }
+
     public void showYearPager() {
-        mYCalendarPager.setVisibility(VISIBLE);     // nop
+//        mYCalendarPager.setVisibility(VISIBLE);     // nop
         mMCalendarPager.setVisibility(GONE);
         mWCalendarPager.setVisibility(GONE);
     }
 
     public LocalDate getSelectDate() {
         return mMCalendarPager.getSelectedDate();
+    }
+
+    public Attrs getAttr() {
+        return mAttrs;
     }
 }
