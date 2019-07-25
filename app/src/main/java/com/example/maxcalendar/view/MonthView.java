@@ -3,6 +3,7 @@ package com.example.maxcalendar.view;
 import android.content.Context;
 import android.view.View;
 
+import com.example.maxcalendar.bean.DailyTask;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
 
@@ -12,8 +13,8 @@ import java.util.List;
 
 public class MonthView extends com.example.maxcalendar.view.CalendarView {
 
-    public MonthView(Attrs attrs, Context context, LocalDate initDate, List<LocalDate> dates) {
-        super(attrs, context, initDate, dates);
+    public MonthView(Attrs attrs, Context context, LocalDate initDate, List<LocalDate> dates, List<DailyTask> dailyTaskList) {
+        super(attrs, context, initDate, dates, dailyTaskList);
     }
 
     @Override

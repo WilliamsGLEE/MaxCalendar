@@ -2,6 +2,7 @@ package com.example.maxcalendar.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.TextUtils;
 
 import com.example.maxcalendar.R;
 import com.example.maxcalendar.bean.Date;
@@ -135,6 +136,24 @@ public class DateUtil {
         date.solarHoliday = HolidayUtil.getSolarHoliday(solarYear, solarMonth, solarDay);
         date.lunarHoliday = HolidayUtil.getLunarHoliday(lunarDate.lunarYear, lunarDate.lunarMonth, lunarDate.lunarDay);
         return date;
+    }
+
+    /**
+     * 获取当日农历栏
+     */
+    public static String getLunarText(Date date) {
+
+        String lunarString;
+        if (!TextUtils.isEmpty(date.solarHoliday)) {        // 农历栏优先节日
+            lunarString = date.solarHoliday;
+        } else if (!TextUtils.isEmpty(date.lunarHoliday)) {
+            lunarString = date.lunarHoliday;
+        } else if (!TextUtils.isEmpty(date.solarTerm)) {
+            lunarString = date.solarTerm;
+        } else {
+            lunarString = date.getLunarDate().lunarDrawStr;
+        }
+        return lunarString;
     }
 
     public static boolean isLastMonth(LocalDate clickDate, LocalDate initDate) {

@@ -6,7 +6,9 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.maxcalendar.bean.DailyTask;
 import com.example.maxcalendar.calendar.BaseCalendarPager;
+import com.example.maxcalendar.dao.TaskDaoUtil;
 import com.example.maxcalendar.painter.IMWPainter;
 import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.util.Attrs;
@@ -28,13 +30,15 @@ public abstract class CalendarView extends View implements View.OnClickListener 
     protected List<Rect> mRectList;
     protected LocalDate mSelectDate;
     protected float mX, mY;     // 点击的X,Y坐标
+    protected List<DailyTask> mDailyTaskList;
 
-    public CalendarView(Attrs attrs, Context context, LocalDate initDate, List<LocalDate> dates) {
+    public CalendarView(Attrs attrs, Context context, LocalDate initDate, List<LocalDate> dates, List<DailyTask> dailyTaskList) {
         super(context);
         this.mInitDate = initDate;
         this.mDateList = dates;
         this.mRowNum = mDateList.size() / 7;
         this.mItemHeight = attrs.mItemHeight;
+        this.mDailyTaskList = dailyTaskList;
         mRectList = new ArrayList<>();
         setOnClickListener(this);
     }
@@ -67,6 +71,11 @@ public abstract class CalendarView extends View implements View.OnClickListener 
                         } else {
                             painter.drawDayThisMonthNotToday(canvas, itemRect, DateUtil.getDate(itemDate), itemDate.equals(mSelectDate));
                         }
+
+//                        if (mDailyTaskList.contains())) {
+//
+//                        }
+
                     } else {         // 不是当月
                         painter.drawDayNotInThisMonth(canvas, itemRect, DateUtil.getDate(itemDate));
                     }

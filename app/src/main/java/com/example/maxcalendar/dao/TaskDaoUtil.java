@@ -77,20 +77,21 @@ public class TaskDaoUtil {
     /**
      * 根据指定条件查询数据
      */
-    public List<DailyTask> queryTaskTestMethod() {
-        //查询构建器
-        QueryBuilder<DailyTask> builder = mManager.getDaoSession().queryBuilder(DailyTask.class);
-        List<DailyTask> list = builder.where(DailyTaskDao.Properties.Date.ge(1)).where(DailyTaskDao.Properties.Date.like("20190627")).list();
-        return list;
-    }
+//    public List<DailyTask> queryTaskTestMethod() {
+//        //查询构建器
+//        QueryBuilder<DailyTask> builder = mManager.getDaoSession().queryBuilder(DailyTask.class);
+//        List<DailyTask> list = builder.where(DailyTaskDao.Properties.Date.ge(1)).where(DailyTaskDao.Properties.Date.like("20190627")).list();
+//        return list;
+//    }
 
     /**
      * 根据日期查找当日日程
      */
-    public List<DailyTask> queryTaskByDate(String date) {
+    public List<DailyTask> queryTaskByYMD(int year, int month, int day) {
         QueryBuilder<DailyTask> builder = mManager.getDaoSession().queryBuilder(DailyTask.class);
-        List<DailyTask> list = builder.where(DailyTaskDao.Properties.Date.eq(date)).list();
-        return list;
+        return builder.where(DailyTaskDao.Properties.Year.eq(year)).
+                where(DailyTaskDao.Properties.Month.eq(month)).
+                where(DailyTaskDao.Properties.Day.eq(day)).list();
     }
 
     /**

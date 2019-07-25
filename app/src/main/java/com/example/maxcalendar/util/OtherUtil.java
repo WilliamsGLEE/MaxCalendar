@@ -2,6 +2,9 @@ package com.example.maxcalendar.util;
 
 import android.content.Context;
 
+import com.example.maxcalendar.R;
+import com.example.maxcalendar.constant.Constant;
+
 public class OtherUtil {
 
     /**
@@ -34,5 +37,16 @@ public class OtherUtil {
     public static int pxToSp(Context context, float pxValue) {
         float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    /**
+     * 根据日程优先级选择对应颜色
+     */
+    public static int eventTypeToColor(int type) {
+        if (type == Constant.RED) {
+            return R.color.red;
+        }
+        return R.color.blue;
+
     }
 }

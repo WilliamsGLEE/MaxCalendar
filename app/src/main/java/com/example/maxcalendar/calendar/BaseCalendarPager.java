@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.maxcalendar.adapter.BaseCalendarAdapter;
+import com.example.maxcalendar.bean.DailyTask;
 import com.example.maxcalendar.listener.OnCalendarSelectedChangedListener;
 import com.example.maxcalendar.listener.OnMWDateChangeListener;
 import com.example.maxcalendar.listener.OnMonthCalendarScrolledListener;
@@ -34,9 +35,9 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
     protected Attrs mAttrs;
     private boolean mIsInflateCompleted;
     protected LocalDate mSelectedDate;
-    private List<LocalDate> mSchemeDateList;
+    private List<DailyTask> mSchemeDateList;
     private boolean isFirstDraw = true;        // 是否第一次绘制
-    public CalendarLayout mCalendarLayout;
+    public com.example.maxcalendar.calendar.CalendarLayout mCalendarLayout;
 
     protected OnCalendarSelectedChangedListener mOnCalendarSelectedChangedListener;
     protected OnMonthCalendarScrolledListener mOnMonthCalendarScrolledListener;
@@ -71,8 +72,8 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
     @Override
     protected void onAttachedToWindow() {       // 当View附加到窗体时，也就是View和Window绑定时就会调用这个函数(onResume之后)
         super.onAttachedToWindow();
-        if (getParent() != null && getParent() instanceof CalendarLayout) {
-            mCalendarLayout = (CalendarLayout) getParent();
+        if (getParent() != null && getParent() instanceof com.example.maxcalendar.calendar.CalendarLayout) {
+            mCalendarLayout = (com.example.maxcalendar.calendar.CalendarLayout) getParent();
         }
         initDate();
         init(mContext);
@@ -85,7 +86,7 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         mEndDate = new LocalDate(mAttrs.endDateString);
         mSelectedDate = mInitDate;
 
-        mBaseCalendarAdapter = getCalendarAdapter(mAttrs, mContext, mStartDate, mEndDate, mInitDate);
+        mBaseCalendarAdapter = getCalendarAdapter(mAttrs, mContext, mStartDate, mEndDate, mInitDate, mSchemeDateList);
 
         setAdapter(mBaseCalendarAdapter);
         setCurrentItem(mBaseCalendarAdapter.getCurrentPosition());
@@ -251,7 +252,7 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         return mAttrs;
     }
 
-    protected abstract BaseCalendarAdapter getCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate);
+    protected abstract BaseCalendarAdapter getCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate, List<DailyTask> dailyTaskList);
 
     protected abstract int getIntervalTwoDates(LocalDate currDate, LocalDate jumpDate);
 

@@ -10,12 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.maxcalendar.bean.DailyTask;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
 import com.example.maxcalendar.view.CalendarView;
 import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
+
+import java.util.List;
 
 public abstract class BaseCalendarAdapter extends PagerAdapter {
 
@@ -24,20 +27,22 @@ public abstract class BaseCalendarAdapter extends PagerAdapter {
     protected int mCrr;
     protected LocalDate mInitDate;
     protected Attrs mAttrs;
+    protected List<DailyTask> mDailyTaskList;
 
 
-    public BaseCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate) {
+    public BaseCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate, List<DailyTask> dailyTaskList) {
         this.mContext = context;
         this.mInitDate = initDate;
         this.mAttrs = attrs;
         this.mCount = getIntervalCount(startDate, endDate) + 1;
         this.mCrr = getIntervalCount(startDate, initDate);
+        this.mDailyTaskList = dailyTaskList;
     }
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {     // 向ViewPager中添加子View
-        CalendarView calendarView = getCalendarView(mAttrs, position);
+        CalendarView calendarView = getCalendarView(mAttrs, position, mDailyTaskList);
         calendarView.setTag(position);
         container.addView(calendarView);        // container数量保持3
         return calendarView;                // 返回值object，就是View的id。
@@ -54,7 +59,7 @@ public abstract class BaseCalendarAdapter extends PagerAdapter {
         return mCount;
     }
 
-    protected abstract CalendarView getCalendarView(Attrs attrs, int position);
+    protected abstract CalendarView getCalendarView(Attrs attrs, int position, List<DailyTask> dailyTaskList);
 
     // 当前页的位置
     public int getCurrentPosition() {

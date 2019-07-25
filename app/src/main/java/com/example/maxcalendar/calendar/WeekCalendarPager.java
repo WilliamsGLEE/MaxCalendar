@@ -8,12 +8,15 @@ import androidx.annotation.Nullable;
 
 import com.example.maxcalendar.adapter.BaseCalendarAdapter;
 import com.example.maxcalendar.adapter.WeekCalendarAdapter;
+import com.example.maxcalendar.bean.DailyTask;
 import com.example.maxcalendar.painter.IMWPainter;
 import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
 
 import org.joda.time.LocalDate;
+
+import java.util.List;
 
 public class WeekCalendarPager extends com.example.maxcalendar.calendar.BaseCalendarPager {
 
@@ -49,8 +52,8 @@ public class WeekCalendarPager extends com.example.maxcalendar.calendar.BaseCale
     }
 
     @Override
-    protected BaseCalendarAdapter getCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate) {
-        return new WeekCalendarAdapter(attrs, context, startDate, endDate, initDate);
+    protected BaseCalendarAdapter getCalendarAdapter(Attrs attrs, Context context, LocalDate startDate, LocalDate endDate, LocalDate initDate, List<DailyTask> dailyTaskList) {
+        return new WeekCalendarAdapter(attrs, context, startDate, endDate, initDate, dailyTaskList);
     }
 
     @Override

@@ -28,12 +28,13 @@ import com.example.maxcalendar.util.AttrsUtil;
 import com.example.maxcalendar.util.DateUtil;
 
 import org.joda.time.LocalDate;
+import org.joda.time.Months;
 
 public class CalendarLayout extends FrameLayout implements ICalendar, NestedScrollingParent, ValueAnimator.AnimatorUpdateListener {
 
     private MonthCalendarPager mMCalendarPager;
     private WeekCalendarPager mWCalendarPager;
-//    private YearCalendarPager mYCalendarPager;
+    //    private YearCalendarPager mYCalendarPager;
     private IMWPainter mIMWPainter;         // 月和周的绘制器
     //    private YCalendarPainter mYCalendarPainter;
     protected Attrs mAttrs;
@@ -534,7 +535,7 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
 
     private OnMWDateChangeListener onMWDateChangeListener = new OnMWDateChangeListener() {
         @Override
-        public void onMwDateChange(BaseCalendarPager baseCalendarPager, final LocalDate localDate) {
+        public void onMwDateChange(com.example.maxcalendar.calendar.BaseCalendarPager baseCalendarPager, final LocalDate localDate) {
             if (baseCalendarPager == mMCalendarPager && STATE == STATE_MONTH) {
                 // 月日历变化,改变周的选中
                 mWCalendarPager.jumpDate(localDate, false);
@@ -556,7 +557,12 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
     };
 
     public void jumptoADate(LocalDate localDate) {
-        
+        if (STATE == STATE_MONTH) {
+            mMCalendarPager.jumpDate(localDate, true);
+        } else {
+            mWCalendarPager.jumpDate(localDate, true);
+        }
+
     }
 
     public void showYearPager() {

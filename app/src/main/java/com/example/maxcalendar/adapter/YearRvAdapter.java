@@ -20,7 +20,7 @@ import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 
-public class YearRvAdapter extends BaseRvAdapter<Months> {
+public class YearRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapter<Months> {
 
     private int mItemHeight, mItemWidth;
     private Attrs mAttrs;
@@ -37,15 +37,6 @@ public class YearRvAdapter extends BaseRvAdapter<Months> {
         this.mItemWidth = width;
     }
 
-//    @Override
-//    public RecyclerView.ViewHolder createDefViewHolder(ViewGroup parent, int viewType) {
-//        YearView yearView = new YearView(mContext, mAttrs);
-//        RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.MATCH_PARENT);
-//        yearView.setLayoutParams(params);
-//
-//        return new YearViewRvHolder(yearView);
-//    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,7 +46,6 @@ public class YearRvAdapter extends BaseRvAdapter<Months> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof YearViewRvHolder) {
-            Logger.d("TTTTTTTESTTTTTTT : " + position);
             ((YearViewRvHolder) holder).bindView(mDataList.get(position));
         }
     }
@@ -74,16 +64,12 @@ public class YearRvAdapter extends BaseRvAdapter<Months> {
         @Override
         protected void bindView(Months month) {
 
-
-//            mYearView.measureSize(mItemHeight, mItemWidth);
             mYearView.getLayoutParams().height = mItemHeight;
             mYearView.getLayoutParams().width = mItemWidth;     // ?
             mYearView.setYearViewPainter(mYCalendarPainter);
 
             mYearView.init(mAttrs, month);
-            mTextView.setText("一月");
-
-            Logger.d("TTTTTTTESTTTTTTT : " + mDataList.size() + " , " + month.getMonth() + " , " + mItemHeight);
+            mTextView.setText(month.getMonth() + mTextView.getContext().getResources().getString(R.string.monthString));
         }
     }
 
