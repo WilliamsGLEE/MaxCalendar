@@ -13,6 +13,9 @@ public class Attrs {
     public float lunarDistance;
     public int itemRectPadding;
     public float yearViewDayStrokeWidth;
+    public int schemeRectPaddingWidth;
+    public int schemeRectPaddingTop;
+    public int schemeRectPaddingBottom;
 
     public int todayTextColor;
     public int thisMonthTextColor;

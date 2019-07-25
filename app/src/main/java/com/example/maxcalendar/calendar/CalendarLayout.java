@@ -571,6 +571,11 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         mWCalendarPager.setVisibility(GONE);
     }
 
+    public void showOtherPager() {
+        mMCalendarPager.setVisibility(VISIBLE);
+        mWCalendarPager.setVisibility(INVISIBLE);
+    }
+
     public LocalDate getSelectDate() {
         return mMCalendarPager.getSelectedDate();
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public class TaskDaoUtil {
 
     private static final boolean DUBUG = true;
-    private DaoManager mManager;
+    private static DaoManager mManager;
     private DailyTaskDao mDailyTaskDao;
     private DaoSession mDaoSession;
 
@@ -27,7 +27,7 @@ public class TaskDaoUtil {
     /**
      * 添加数据，如果有重复则覆盖
      */
-    public void insertTask(DailyTask task) {
+    public static void insertTask(DailyTask task) {
         mManager.getDaoSession().insertOrReplace(task);
     }
 
@@ -49,21 +49,21 @@ public class TaskDaoUtil {
     /**
      * 删除数据
      */
-    public void deleteTask(DailyTask task) {
+    public static void deleteTask(DailyTask task) {
         mManager.getDaoSession().delete(task);
     }
 
     /**
      * 删除全部数据
      */
-    public void deleteAll(Class cls) {
+    public static void deleteAll(Class cls) {
         mManager.getDaoSession().deleteAll(cls);
     }
 
     /**
      * 更新数据
      */
-    public void updateTask(DailyTask task) {
+    public static void updateTask(DailyTask task) {
         mManager.getDaoSession().update(task);
     }
 
@@ -87,7 +87,7 @@ public class TaskDaoUtil {
     /**
      * 根据日期查找当日日程
      */
-    public List<DailyTask> queryTaskByYMD(int year, int month, int day) {
+    public static List<DailyTask> queryTaskByYMD(int year, int month, int day) {
         QueryBuilder<DailyTask> builder = mManager.getDaoSession().queryBuilder(DailyTask.class);
         return builder.where(DailyTaskDao.Properties.Year.eq(year)).
                 where(DailyTaskDao.Properties.Month.eq(month)).
@@ -97,7 +97,7 @@ public class TaskDaoUtil {
     /**
      * 查询全部数据
      */
-    public List<DailyTask> queryAll() {
+    public static List<DailyTask> queryAll() {
         return mManager.getDaoSession().loadAll(DailyTask.class);
     }
 }

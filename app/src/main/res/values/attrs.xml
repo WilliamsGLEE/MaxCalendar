@@ -10,6 +10,9 @@
         <attr name="lunarDistance" format="float"/>
         <attr name="itemRectPadding" format="integer"/>
         <attr name="yearViewDayStrokeWidth" format="float"/>
+        <attr name="schemeRectPaddingWidth" format="integer"/>
+        <attr name="schemeRectPaddingTop" format="integer"/>
+        <attr name="schemeRectPaddingBottom" format="integer"/>
 
         <attr name="todayTextColor" format="integer"/>
         <attr name="thisMonthTextColor" format="integer"/>

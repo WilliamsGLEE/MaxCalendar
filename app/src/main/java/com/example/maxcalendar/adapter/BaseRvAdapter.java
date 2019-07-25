@@ -103,9 +103,11 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
     public int getItemCount() {
         if (mDataList.size() == 0) {
             // 当 normal item 的数量为0时，若有 noneView，则显示 noneView
-            return mNoneView != null ? 1 : 0;
+            return mNoneView != null ? 1 : 0;     // ？？
+//            return mFooterView != null ? 1 : 0;
         }
         return mDataList.size() + (mFooterView == null ? 0 : 1);
+//        return mDataList.size();
     }
 
     // RecyclerView不提供点击事件，自定义点击事件

@@ -64,8 +64,10 @@ public class MWCalendarPainter extends BasePainter implements IMWPainter {
     }
 
     @Override
-    public void drawSchemaDate(Canvas canvas, Rect rect, Date date, int schema) {
-
+    public void drawSchemaDate(Canvas canvas, Rect rect, int type) {
+        drawBackGround(canvas, mContext.getResources().getColor(OtherUtil.eventTypeToColor(type)), Paint.Style.FILL, rect.left + mAttrs.itemRectPadding + mAttrs.schemeRectPaddingWidth,
+                rect.top + mAttrs.itemRectPadding + mAttrs.schemeRectPaddingTop, rect.right - mAttrs.itemRectPadding - mAttrs.schemeRectPaddingWidth,
+                rect.bottom - mAttrs.itemRectPadding - mAttrs.schemeRectPaddingBottom);
     }
 
     // 获取当日农历栏
@@ -83,7 +85,6 @@ public class MWCalendarPainter extends BasePainter implements IMWPainter {
         }
         return lunarString;
     }
-
 }
 
 

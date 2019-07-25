@@ -29,6 +29,9 @@ public class AttrsUtil {
         attrs.lunarDistance = typedArray.getFloat(R.styleable.MaxCalendar_lunarDistance, 45f);
         attrs.itemRectPadding = typedArray.getInt(R.styleable.MaxCalendar_itemRectPadding, OtherUtil.dpToPx(context, 5));
         attrs.yearViewDayStrokeWidth = typedArray.getFloat(R.styleable.MaxCalendar_yearViewDayStrokeWidth, 0.3f);
+        attrs.schemeRectPaddingWidth = typedArray.getInt(R.styleable.MaxCalendar_schemeRectPaddingWidth, OtherUtil.dpToPx(context, 14));
+        attrs.schemeRectPaddingTop = typedArray.getInt(R.styleable.MaxCalendar_schemeRectPaddingTop, OtherUtil.dpToPx(context, 48));
+        attrs.schemeRectPaddingBottom = typedArray.getInt(R.styleable.MaxCalendar_schemeRectPaddingBottom, OtherUtil.dpToPx(context, 5));
 
         attrs.todayTextColor = typedArray.getInt(R.styleable.MaxCalendar_todayTextColor, context.getResources().getColor(R.color.red));  // 直接用R.color.red得到的值是负数
         attrs.thisMonthTextColor = typedArray.getInt(R.styleable.MaxCalendar_thisMonthTextColor, context.getResources().getColor(R.color.black));

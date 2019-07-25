@@ -24,14 +24,30 @@ public class EventRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapte
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        if (viewType == TYPE_NORMAL) {
+//            return new EventRvHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_activity_calendar, parent, false));
+//        } else if (viewType == TYPE_FOOTER) {
+//            return new EventRvHolder(getFooterView());
+//        }
+
+        if (viewType == TYPE_FOOTER) {
+            return new EventRvHolder(getFooterView());
+        }
         return new EventRvHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_activity_calendar, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof EventRvHolder) {
-            ((EventRvHolder) holder).bindView(mDataList.get(position));
-        }
+
+//        if (getItemViewType(position) == TYPE_NONE) {
+//            return;
+//        } else if (getItemViewType(position) == TYPE_NORMAL) {
+            if (holder instanceof EventRvHolder && getItemViewType(position) == TYPE_NORMAL) {
+                ((EventRvHolder) holder).bindView(mDataList.get(position));
+            }
+//        } else if (getItemViewType(position) == TYPE_FOOTER) {
+//            ((BaseRvHolder) holder).bindView(mDataList.get(position));
+//        }
     }
 
     class EventRvHolder extends BaseRvHolder {

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="450dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tv_currentDate_dialog_add_new_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置 2019年5月17日的日程"
+        android:textSize="22sp"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titleString"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <EditText
+            android:id="@+id/et_title_dialog_add_new_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:maxLines="1"
+            android:maxLength="20"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/priorityString"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <EditText
+            android:id="@+id/et_priority_dialog_add_new_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:maxLines="1"
+            android:maxLength="20"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/startTimeString"
+                android:textColor="@color/black"
+                android:textSize="17sp"/>
+
+            <EditText
+                android:id="@+id/et_startTime_dialog_add_new_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:maxLines="1"
+                android:maxLength="20"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/endTimeString"
+                android:textColor="@color/black"
+                android:textSize="17sp"/>
+
+            <EditText
+                android:id="@+id/et_endTime_dialog_add_new_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginLeft="7dp"
+                android:maxLines="1"
+                android:maxLength="20"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:text="@string/contentString"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+        <EditText
+            android:id="@+id/et_content_dialog_add_new_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:maxLines="3"
+            android:maxLength="100"
+            android:gravity="top"
+            android:text=""/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1">-->
+
+            <ImageView
+                android:id="@+id/iv_cancel_dialog_add_new_event"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_clear_red_30dp"
+                android:layout_gravity="center"/>
+
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1">-->
+
+            <ImageView
+                android:id="@+id/iv_confirm_dialog_add_new_event"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_check_box_green_30dp"
+                android:layout_gravity="center"/>
+
+
+        <!--</LinearLayout>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/cancelString"-->
+            <!--android:textSize="25sp"-->
+            <!--android:textColor="@color/red"-->
+            <!--android:gravity="center" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="@string/confirmString"-->
+            <!--android:textSize="25sp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/blue"/>-->
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

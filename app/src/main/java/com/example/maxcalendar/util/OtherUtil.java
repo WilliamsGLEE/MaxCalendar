@@ -1,8 +1,10 @@
 package com.example.maxcalendar.util;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.maxcalendar.R;
+import com.example.maxcalendar.app.MyApplication;
 import com.example.maxcalendar.constant.Constant;
 
 public class OtherUtil {
@@ -45,8 +47,19 @@ public class OtherUtil {
     public static int eventTypeToColor(int type) {
         if (type == Constant.RED) {
             return R.color.red;
+        } else if (type == Constant.ORANGE) {
+            return R.color.orange;
+        } else if (type == Constant.BLUE) {
+            return R.color.blue;
+        } else if (type == Constant.GREEN) {
+            return R.color.green;
+        } else if (type == Constant.YELLOW) {
+            return R.color.yellow;
         }
-        return R.color.blue;
+        return R.color.yellow;
+    }
 
+    public static void showToastMessage(String msg) {
+        Toast.makeText(MyApplication.getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }

@@ -12,4 +12,14 @@
     <string name="monthString">Month</string>
     <string name="dayString">Day</string>
 
+    <string name="addCalendarEventString">Add An Calendar Event</string>
+    <string name="titleString">Title : </string>
+    <string name="priorityString">Priority ：</string>
+    <string name="startTimeString">Start Time : </string>
+    <string name="endTimeString">End Time : </string>
+    <string name="contentString">Content ：</string>
+e
+    <string name="cancelString">Cancel</string>
+    <string name="confirmString">Confirm</string>
+
 </resources>

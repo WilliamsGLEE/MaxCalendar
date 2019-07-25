@@ -39,11 +39,9 @@ public class DailyTask {
     @NotNull
     private int day;
 
-
-
     @Generated(hash = 1542652020)
     public DailyTask(Long id, String content, int type, String time,
-                     @NotNull String title, int year, int month, int day) {
+            @NotNull String title, int year, int month, int day) {
         this.id = id;
         this.content = content;
         this.type = type;

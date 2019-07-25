@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.maxcalendar.adapter.BaseCalendarAdapter;
 import com.example.maxcalendar.bean.DailyTask;
+import com.example.maxcalendar.dao.TaskDaoUtil;
 import com.example.maxcalendar.listener.OnCalendarSelectedChangedListener;
 import com.example.maxcalendar.listener.OnMWDateChangeListener;
 import com.example.maxcalendar.listener.OnMonthCalendarScrolledListener;
@@ -84,6 +85,9 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         mInitDate = new LocalDate();
         mStartDate = new LocalDate(mAttrs.startDateString);
         mEndDate = new LocalDate(mAttrs.endDateString);
+
+        mSchemeDateList = TaskDaoUtil.queryAll();           // 查询所有的日程
+
         mSelectedDate = mInitDate;
 
         mBaseCalendarAdapter = getCalendarAdapter(mAttrs, mContext, mStartDate, mEndDate, mInitDate, mSchemeDateList);

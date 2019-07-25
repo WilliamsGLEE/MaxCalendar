@@ -25,6 +25,6 @@ public interface IMWPainter {
     /**
      * 绘制日程（根据不同优先级）
      */
-    void drawSchemaDate(Canvas canvas, Rect rect, Date date, int schema);
+    void drawSchemaDate(Canvas canvas, Rect rect, int type);
 
 }
