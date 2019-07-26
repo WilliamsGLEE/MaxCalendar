@@ -9,6 +9,7 @@
     <string name="STU">六</string>
     <string name="SUN">日</string>
 
+    <string name="yearString">年</string>
     <string name="monthString">月</string>
     <string name="dayString">日</string>
 
@@ -21,5 +22,11 @@
 
     <string name="cancelString">取消</string>
     <string name="confirmString">确认</string>
+
+    <string name="addNewEventErrorString">请填写完整的数据！</string>
+
+    <string name="settingString">设置</string>
+
+    <string name="calendarEvent">日程</string>
 
 </resources>

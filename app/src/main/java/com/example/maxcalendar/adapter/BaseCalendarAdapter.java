@@ -1,20 +1,15 @@
 package com.example.maxcalendar.adapter;
 
 import android.content.Context;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.maxcalendar.bean.DailyTask;
 import com.example.maxcalendar.util.Attrs;
-import com.example.maxcalendar.util.DateUtil;
 import com.example.maxcalendar.view.CalendarView;
-import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
 

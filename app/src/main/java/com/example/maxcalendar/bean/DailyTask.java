@@ -56,6 +56,23 @@ public class DailyTask {
     public DailyTask() {
     }
 
+//    @Generated(hash = 1542652020)
+//    public DailyTask(Long id, String content, int type, String time,
+//            @NotNull String title, int year, int month, int day) {
+//        this.id = id;
+//        this.content = content;
+//        this.type = type;
+//        this.time = time;
+//        this.title = title;
+//        this.year = year;
+//        this.month = month;
+//        this.day = day;
+//    }
+//
+//    @Generated(hash = 1280034224)
+//    public DailyTask() {
+//    }
+
     public Long getId() {
         return this.id;
     }

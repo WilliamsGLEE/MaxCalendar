@@ -20,7 +20,7 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
 
     protected static final int TYPE_FOOTER = 0;  // 说明是带有Footer的
     protected static final int TYPE_NORMAL = 1;  // 说明是不带有header和footer的
-    protected static final int TYPE_NONE = 2; // 没有数据
+    protected static final int TYPE_NONE = 2;   // 没有数据
 
     protected List<T> mDataList = new ArrayList<>();
     private OnClickRvListener mOnClickRvListener;
@@ -103,11 +103,9 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
     public int getItemCount() {
         if (mDataList.size() == 0) {
             // 当 normal item 的数量为0时，若有 noneView，则显示 noneView
-            return mNoneView != null ? 1 : 0;     // ？？
-//            return mFooterView != null ? 1 : 0;
+            return mNoneView != null ? 1 : 0;
         }
         return mDataList.size() + (mFooterView == null ? 0 : 1);
-//        return mDataList.size();
     }
 
     // RecyclerView不提供点击事件，自定义点击事件
@@ -159,81 +157,3 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
         }
     }
 }
-
-//public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
-//
-//    protected List<T> mDataList;
-//    protected Context mContext;
-//    protected OnMonthSelectedListener mOnRvItemClickListener;
-//    private OnClickListener mOnClickListener;
-//
-//
-//    public BaseRvAdapter(Context context) {
-//        this.mContext = context;
-//        this.mDataList = new ArrayList<>();
-//
-//        mOnClickListener = new OnClickListener() {
-//            @Override
-//            void onClick(int position, long itemId) {
-//                mOnRvItemClickListener.onItemClick(position, itemId);
-//            }
-//        };
-//    }
-//
-//    @NonNull
-//    @Override
-//    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        RecyclerView.ViewHolder holder = createDefViewHolder(parent, viewType);
-//        if (holder != null) {
-//            holder.itemView.setTag(holder);
-//            holder.itemView.setOnClickListener(mOnClickListener);
-//        }
-//        return null;
-//    }
-//
-//
-//    public abstract RecyclerView.ViewHolder createDefViewHolder(ViewGroup parent, int viewType);
-//
-//
-//    public void setOnItemClickListener(OnMonthSelectedListener onRvItemClickListener) {
-//        this.mOnRvItemClickListener = onRvItemClickListener;
-//    }
-//
-//    public void addItem(T item) {
-//        if (item != null) {
-//            mDataList.add(item);
-//            notifyItemChanged(mDataList.size());
-//        }
-//    }
-//
-//    public void setItemList(List<T> itemList) {
-//        if (itemList != null) {
-//            mDataList.addAll(itemList);
-//            notifyDataSetChanged();
-//        }
-//    }
-//
-//    public T getItem(int position) {
-//        if (!(position < 0 || position > mDataList.size())) {
-//            return mDataList.get(position);
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return mDataList.size();
-//    }
-//
-//    static abstract class OnClickListener implements View.OnClickListener {
-//        @Override
-//        public void onClick(View v) {
-//            RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) v.getTag();
-//            onClick(holder.getAdapterPosition(), holder.getItemId());
-//
-//            Logger.d("TTTESTTT onClick : " + holder.getAdapterPosition() + " , " + holder.getItemId());
-//        }
-//
-//        abstract void onClick(int position, long itemId);
-//    }
-//}

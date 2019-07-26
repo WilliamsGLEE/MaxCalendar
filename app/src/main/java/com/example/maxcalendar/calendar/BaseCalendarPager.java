@@ -10,13 +10,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.maxcalendar.adapter.BaseCalendarAdapter;
 import com.example.maxcalendar.bean.DailyTask;
-import com.example.maxcalendar.dao.TaskDaoUtil;
+import com.example.maxcalendar.dao.GreenDaoHelper;
 import com.example.maxcalendar.listener.OnCalendarSelectedChangedListener;
 import com.example.maxcalendar.listener.OnMWDateChangeListener;
 import com.example.maxcalendar.listener.OnMonthCalendarScrolledListener;
 import com.example.maxcalendar.painter.IMWPainter;
 import com.example.maxcalendar.painter.MWCalendarPainter;
-import com.example.maxcalendar.painter.IPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.AttrsUtil;
 import com.example.maxcalendar.util.DateUtil;
@@ -38,7 +37,8 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
     protected LocalDate mSelectedDate;
     private List<DailyTask> mSchemeDateList;
     private boolean isFirstDraw = true;        // 是否第一次绘制
-    public com.example.maxcalendar.calendar.CalendarLayout mCalendarLayout;
+    public CalendarLayout mCalendarLayout;
+    protected GreenDaoHelper mGreenDaoHelper;
 
     protected OnCalendarSelectedChangedListener mOnCalendarSelectedChangedListener;
     protected OnMonthCalendarScrolledListener mOnMonthCalendarScrolledListener;
@@ -81,12 +81,12 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
     }
 
     protected void initDate() {
-//        mCalendarLayout = (CalendarLayout) getParent();
         mInitDate = new LocalDate();
         mStartDate = new LocalDate(mAttrs.startDateString);
         mEndDate = new LocalDate(mAttrs.endDateString);
+        mGreenDaoHelper = new GreenDaoHelper(mContext);
 
-        mSchemeDateList = TaskDaoUtil.queryAll();           // 查询所有的日程
+        mSchemeDateList = mGreenDaoHelper.queryAll();           // 查询所有的日程
 
         mSelectedDate = mInitDate;
 
@@ -96,16 +96,17 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         setCurrentItem(mBaseCalendarAdapter.getCurrentPosition());
     }
 
+    // reSelect：true：正常变换 mSelectDate
+    // reSelect：false：通过 OnMWDateChangeListener 变换 mSelectDate
+    protected void drawView(int position, boolean reSelect, LocalDate mwChangeDate) {
 
-    protected void drawView(int position, boolean reSelect, LocalDate mwChangeDate) {   // reSelect：true：正常变换 mSelectDate
-        //           false：通过 OnMWDateChangeListener 变换 mSelectDate
         CalendarView currCalendarView = findViewWithTag(position);
         if (currCalendarView == null) {
             return;
         }
         LocalDate tempDate = mSelectedDate;
 
-        if (!isFirstDraw) {     // 日历第一次打开的时候显示的是当天
+        if (!isFirstDraw) {                         // 日历第一次打开的时候显示的是当天
             mSelectedDate = currCalendarView.getFirstDate();
         }
 
@@ -116,14 +117,12 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
                 mSelectedDate = tempDate;
             }
         }
-        if (!reSelect) {            // 调整2：通过 OnMWDateChangeListener 回调时
+        if (!reSelect) {                            // 调整2：通过 OnMWDateChangeListener 回调时
             mSelectedDate = mwChangeDate;
         }
 
         isFirstDraw = false;
-
         currCalendarView.invalidate();
-
         callback();
     }
 
@@ -150,7 +149,6 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         LocalDate currDate = currCalendarView.getInitDate();
         int offSet = getIntervalTwoDates(currDate, toDate);
         mSelectedDate = toDate;
-
         mAttrs.mIndexDate = mSelectedDate;
 
         if (offSet == 0) {
@@ -213,7 +211,8 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
         post(new Runnable() {
             @Override
             public void run() {
-                if (mOnCalendarSelectedChangedListener != null && getVisibility() == VISIBLE) {     // 只有当前pager可见时才调用onCalendarSelected
+                if (mOnCalendarSelectedChangedListener != null && getVisibility() == VISIBLE) {
+                    // 只有当前pager可见时才调用onCalendarSelected
                     // 不可见时说明只是另一个calendar滑动，该calendar不需要显示更新选中日期
                     mOnCalendarSelectedChangedListener.onCalendarSelected(mSelectedDate);
                 }

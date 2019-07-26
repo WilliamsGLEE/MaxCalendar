@@ -65,6 +65,4 @@ public class WeekCalendarPager extends com.example.maxcalendar.calendar.BaseCale
     protected LocalDate getIntervalDate(LocalDate localDate, int count) {
         return localDate.plusWeeks(count);
     }
-
-
 }

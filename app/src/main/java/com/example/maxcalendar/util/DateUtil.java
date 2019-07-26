@@ -234,6 +234,6 @@ public class DateUtil {
         String fri = resources.getString(R.string.FRI);
         String stu = resources.getString(R.string.STU);
         String sun = resources.getString(R.string.SUN);
-        return new String[]{sun, the, wed, thr, fri, stu, mon};
+        return new String[]{sun, mon, the, wed, thr, fri, stu};
     }
 }

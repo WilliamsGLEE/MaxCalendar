@@ -46,7 +46,7 @@ public class YearRvView extends RecyclerView {
     }
 
     public void init(Context context) {
-        mYearRvAdapter = new YearRvAdapter(context, mAttrs, mYCalendarPainter);
+        mYearRvAdapter = new YearRvAdapter(mAttrs, mYCalendarPainter);
         setLayoutManager(new GridLayoutManager(context, 3));
         setAdapter(mYearRvAdapter);
         mYearRvAdapter.setOnRecyclerViewListener(new OnClickRvListener() {
@@ -99,10 +99,6 @@ public class YearRvView extends RecyclerView {
         super.onMeasure(widthSpec, heightSpec);
         int height = MeasureSpec.getSize(heightSpec);
         int width = MeasureSpec.getSize(widthSpec);
-//        mYearRvAdapter.setItemSize(height / mAttrs.yearViewRvRows, width / mAttrs.yearViewRvColumns);
-//        mYearRvAdapter.setItemHeight(height / 4);
         mYearRvAdapter.setItemSize(height / 5, width / 3);
-
-        Logger.d("TTTTTTESTTTTTT : " + height + " , " + width);
     }
 }

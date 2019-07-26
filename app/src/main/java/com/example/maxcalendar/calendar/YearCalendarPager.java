@@ -21,12 +21,11 @@ import org.joda.time.LocalDate;
 public class YearCalendarPager extends ViewPager {
 
     private YearCalendarAdapter mYearCalendarAdapter;
-    private Context mContext;
     private Attrs mAttrs;
     private YCalendarPainter mYCalendarPainter;
     private OnMonthSelectedListener mOnMonthSelectedListener;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDate mStartDate;
+    private LocalDate mEndDate;
 
     public YearCalendarPager(@NonNull Context context) {
         super(context, null);
@@ -34,18 +33,6 @@ public class YearCalendarPager extends ViewPager {
 
     public YearCalendarPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-//        this.mContext = context;
-//        this.mAttrs = AttrsUtil.getAttrs(context, attrs);
-//        this.mYCalendarPainter = new YCalendarPainter(context, mAttrs);
-//
-//        startDate = new LocalDate(mAttrs.startDateString);
-//        endDate = new LocalDate(mAttrs.endDateString);
-    }
-
-    public YearCalendarPager(Context context,  Attrs attrs, YCalendarPainter painter) {
-        super(context);
-//        this.mAttrs = attrs;
-//        this.mYCalendarPainter = painter;
     }
 
     public void setOnMonthSelectedListener(OnMonthSelectedListener listener) {
@@ -53,23 +40,23 @@ public class YearCalendarPager extends ViewPager {
     }
 
     public void init(Attrs attrs) {
-
-//        this.mContext = context;
         this.mAttrs = attrs;
         this.mYCalendarPainter = new YCalendarPainter(getContext(), mAttrs);
 
-        startDate = new LocalDate(mAttrs.startDateString);
-        endDate = new LocalDate(mAttrs.endDateString);
+        mStartDate = new LocalDate(mAttrs.startDateString);
+        mEndDate = new LocalDate(mAttrs.endDateString);
 
-        mYearCalendarAdapter = new YearCalendarAdapter(getContext(), mAttrs, mYCalendarPainter, startDate, endDate);
+        mYearCalendarAdapter = new YearCalendarAdapter(getContext(), mAttrs, mYCalendarPainter, mStartDate, mEndDate);
         mYearCalendarAdapter.setOnMonthSelectedListener(mOnMonthSelectedListener);
         setAdapter(mYearCalendarAdapter);
-        setCurrentItem(new LocalDate().getYear() - startDate.getYear());
-
-        Logger.d("TTTTESTTTT : " + startDate.toString() + " , " + endDate.toString() + " , " + new LocalDate().getYear() + " , " + (new LocalDate().getYear() - startDate.getYear()) + " , " + getCurrentItem());
+        setCurrentItem(new LocalDate().getYear() - mStartDate.getYear());
     }
 
     void scrollToYear(int year, boolean smoothScroll) {
-        setCurrentItem(year - startDate.getYear(), smoothScroll);
+        setCurrentItem(year - mStartDate.getYear(), smoothScroll);
+    }
+
+    public int getStartYear() {
+        return mStartDate.getYear();
     }
 }

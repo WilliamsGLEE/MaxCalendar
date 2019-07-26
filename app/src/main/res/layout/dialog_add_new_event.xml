@@ -10,7 +10,7 @@
         android:id="@+id/tv_currentDate_dialog_add_new_event"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="设置 2019年5月17日的日程"
+        android:text=""
         android:textSize="22sp"
         android:textColor="@color/black"/>
 
@@ -147,11 +147,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp">
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1">-->
-
             <ImageView
                 android:id="@+id/iv_cancel_dialog_add_new_event"
                 android:layout_width="0dp"
@@ -161,13 +156,6 @@
                 android:layout_gravity="center"/>
 
 
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1">-->
-
             <ImageView
                 android:id="@+id/iv_confirm_dialog_add_new_event"
                 android:layout_width="0dp"
@@ -176,31 +164,6 @@
                 android:src="@drawable/ic_check_box_green_30dp"
                 android:layout_gravity="center"/>
 
-
-        <!--</LinearLayout>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@string/cancelString"-->
-            <!--android:textSize="25sp"-->
-            <!--android:textColor="@color/red"-->
-            <!--android:gravity="center" />-->
-
-        <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@string/confirmString"-->
-            <!--android:textSize="25sp"-->
-            <!--android:gravity="center"-->
-            <!--android:textColor="@color/blue"/>-->
-
-
     </LinearLayout>
-
-
-
 
 </LinearLayout>

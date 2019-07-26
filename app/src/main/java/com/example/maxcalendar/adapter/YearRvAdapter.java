@@ -26,8 +26,7 @@ public class YearRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapter
     private Attrs mAttrs;
     private YCalendarPainter mYCalendarPainter;
 
-    public YearRvAdapter(Context context, Attrs attrs, YCalendarPainter painter) {
-//        super(context);
+    public YearRvAdapter(Attrs attrs, YCalendarPainter painter) {
         this.mAttrs = attrs;
         this.mYCalendarPainter = painter;
     }
@@ -65,7 +64,7 @@ public class YearRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapter
         protected void bindView(Months month) {
 
             mYearView.getLayoutParams().height = mItemHeight;
-            mYearView.getLayoutParams().width = mItemWidth;     // ?
+            mYearView.getLayoutParams().width = mItemWidth;
             mYearView.setYearViewPainter(mYCalendarPainter);
 
             mYearView.init(mAttrs, month);

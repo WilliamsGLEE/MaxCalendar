@@ -41,23 +41,8 @@ public class YearView extends View {
     public void init(Attrs attrs, Months month) {
         this.mAttrs = attrs;
         this.currMonth = month;
-
-//        mItemWidth = (getWidth() - getPaddingLeft() - getPaddingRight()) / 7;
-//        mItemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / 6;
-//
-//        Logger.d("TTTTTESTTTTT : " + mItemWidth + " , " + mItemHeight);
-
         countLines();
     }
-
-    public void measureSize(int height, int width) {
-//        mItemWidth = width;
-//        mItemHeight = height;
-
-//        mItemWidth = (getWidth() - getPaddingLeft() - getPaddingRight()) / 7;
-//        mItemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / 6;
-    }
-
 
     public void setYearViewPainter(YCalendarPainter painter) {
         this.mYCalendarPainter = painter;
@@ -67,14 +52,8 @@ public class YearView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-//        YearRvView yearRvView = (YearRvView) getParent();
-//        IPainter painter = yearRvView.getYearViewPainter();
-
         mItemWidth = (getWidth() - getPaddingLeft() - getPaddingRight()) / 7;
         mItemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / 6;
-
-        Logger.d("TTTTTESTTTTT : " + mItemWidth + " , " + mItemHeight);
-
 
         Rect itemRect;
 
@@ -82,43 +61,20 @@ public class YearView extends View {
         for (int i = 0; i < mLine; i++) {
             if (i == 0) {               // 第一行
                 for (int j = 0; j < (7 - currMonth.getFirstDayDiff()); j++) {
-
                     itemRect = getItemRect(i, (currMonth.getFirstDayDiff() + j));
                     mYCalendarPainter.drawYearViewDate(canvas, itemRect, d++, false);
-
-//                    ++d;
-//                    canvas.drawText(String.valueOf(j + 1), mDiff * w + j * w + pLeft + w / 2, h, isScheme(d) ? mSchemePaint : mPaint);
                 }
             } else if (i == mLine - 1 && mLastCount != 0) {
-//                int first = currMonth.getDayCount() - mLastCount + 1;
                 for (int j = 0; j < mLastCount; j++) {
-//                    ++d;
-
                     itemRect = getItemRect(i, j);
                     mYCalendarPainter.drawYearViewDate(canvas, itemRect, d++, false);
-
-//                    canvas.drawText(String.valueOf(first), j * w + pLeft + w / 2, (i + 1) * h, isScheme(d) ? mSchemePaint : mPaint);
-//                    ++first;
                 }
-            } else {
-//                int first = i * 7 - mDiff + 1;
-//                for (int j = 0; j < 7; j++) {
-//                    ++d;
-//                    canvas.drawText(String.valueOf(first), j * w + pLeft + w / 2, (i + 1) * h, isScheme(d) ? mSchemePaint : mPaint);
-//                    ++first;
-//                }
 
+            } else {
                 for (int j = 0; j < 7; j++) {
                     itemRect = getItemRect(i, j);
                     mYCalendarPainter.drawYearViewDate(canvas, itemRect, d++, false);
                 }
-//                int first = i * 7 - mDiff + 1;
-//                for (int j = 0; j < 7; j++) {
-//                    ++d;
-//                    canvas.drawText(String.valueOf(first), j * w + pLeft + w / 2, (i + 1) * h, isScheme(d) ? mSchemePaint : mPaint);
-//                    ++first;
-//                }
-
             }
         }
     }
@@ -130,12 +86,6 @@ public class YearView extends View {
     }
 
     public Rect getItemRect(int row, int column) {
-
-//        int itemWidth = (getWidth() - getPaddingLeft() - getPaddingRight()) / 7;
-//        int itemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / 6;
-
         return new Rect(mItemWidth * column, mItemHeight * row, mItemWidth * (column + 1), mItemHeight * (row + 1));
-
     }
-
 }

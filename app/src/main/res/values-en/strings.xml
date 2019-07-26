@@ -9,6 +9,7 @@
     <string name="STU">STU</string>
     <string name="SUN">SUN</string>
 
+    <string name="yearString">Year</string>
     <string name="monthString">Month</string>
     <string name="dayString">Day</string>
 
@@ -21,5 +22,11 @@
 e
     <string name="cancelString">Cancel</string>
     <string name="confirmString">Confirm</string>
+
+    <string name="addNewEventErrorString">Please input correctly!</string>
+
+    <string name="settingString">Setting</string>
+
+    <string name="calendarEvent">Event</string>
 
 </resources>

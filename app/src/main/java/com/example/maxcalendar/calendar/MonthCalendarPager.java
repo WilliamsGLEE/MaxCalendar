@@ -33,8 +33,8 @@ public class MonthCalendarPager extends com.example.maxcalendar.calendar.BaseCal
 
     @Override
     protected void init(Context context) {
-        // 设置初始monthHeight
-        updateMonthViewHeight(mInitDate);
+
+        updateMonthViewHeight(mInitDate);           // 设置初始monthHeight
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         layoutParams.height = mCurrMonthHeight;
 
@@ -100,7 +100,7 @@ public class MonthCalendarPager extends com.example.maxcalendar.calendar.BaseCal
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             }
 
-            layoutParams.height = DateUtil.getMonthHeight(localDate, mAttrs.mItemHeight);       // npe
+            layoutParams.height = DateUtil.getMonthHeight(localDate, mAttrs.mItemHeight);
             setLayoutParams(layoutParams);
         }
 
