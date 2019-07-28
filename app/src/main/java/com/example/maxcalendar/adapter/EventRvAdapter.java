@@ -21,7 +21,7 @@ public class EventRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapte
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType == TYPE_FOOTER) {
+        if (viewType == TYPE_FOOTER || viewType == TYPE_NONE) {
             return new EventRvHolder(getFooterView());
         }
         return new EventRvHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_activity_calendar, parent, false));
