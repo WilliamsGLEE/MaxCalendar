@@ -2,17 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/grey">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginEnd="8dp">
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tv_monthandday_activity_calendar"
@@ -33,14 +34,14 @@
             android:layout_alignTop="@id/tv_monthandday_activity_calendar"
             android:layout_alignBottom="@id/tv_monthandday_activity_calendar"
             android:orientation="vertical"
-            android:layout_marginStart="7dp"
-            android:layout_marginLeft="7dp">
+            android:paddingStart="7dp"
+            android:paddingLeft="7dp">
 
             <TextView
                 android:id="@+id/tv_year_activity_calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="2019"
+                android:text=""
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -78,26 +79,28 @@
         android:layout_below="@id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="18dp"/>
+        android:paddingStart="8dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="18dp"
+        android:background="@color/white"/>
 
     <com.example.maxcalendar.calendar.CalendarLayout
         android:id="@+id/calendarLayout_activity_calendar"
         android:layout_below="@id/wbv_activity_calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:background="@color/white">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_activity_calendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:background="@color/lightgray"
+            android:paddingTop="5dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -109,14 +112,136 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="20dp"
+        android:paddingStart="15dp"
+        android:paddingLeft="15dp"
+        android:paddingEnd="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="20dp"
         android:layout_marginBottom="30dp"
         android:visibility="gone">
 
     </com.example.maxcalendar.calendar.YearCalendarPager>
 
 </RelativeLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical" android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/white">-->
+
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/relativeLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="20dp"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_marginTop="15dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginEnd="8dp">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_monthandday_activity_calendar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:text=""-->
+    <!--android:textSize="28sp"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textStyle="bold"/>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_toEndOf="@id/tv_monthandday_activity_calendar"-->
+    <!--android:layout_toRightOf="@id/tv_monthandday_activity_calendar"-->
+    <!--android:layout_alignTop="@id/tv_monthandday_activity_calendar"-->
+    <!--android:layout_alignBottom="@id/tv_monthandday_activity_calendar"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_marginStart="7dp"-->
+    <!--android:layout_marginLeft="7dp">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_year_activity_calendar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/black"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_weight="1"-->
+    <!--android:textSize="11sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_lunar_activity_calendar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/black"-->
+    <!--android:textSize="11sp"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<ImageButton-->
+    <!--android:id="@+id/ibtn_backToday_activity_calendar"-->
+    <!--android:layout_width="38dp"-->
+    <!--android:layout_height="38dp"-->
+    <!--android:src="@drawable/ic_event_black_30dp"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true" />-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<com.example.maxcalendar.view.WeekBarView-->
+    <!--android:id="@+id/wbv_activity_calendar"-->
+    <!--android:layout_below="@id/relativeLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginTop="18dp"/>-->
+
+    <!--<com.example.maxcalendar.calendar.CalendarLayout-->
+    <!--android:id="@+id/calendarLayout_activity_calendar"-->
+    <!--android:layout_below="@id/wbv_activity_calendar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:clickable="true"-->
+    <!--android:focusable="true">-->
+
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+    <!--android:id="@+id/rv_activity_calendar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--</androidx.recyclerview.widget.RecyclerView>-->
+
+    <!--</com.example.maxcalendar.calendar.CalendarLayout>-->
+
+    <!--<com.example.maxcalendar.calendar.YearCalendarPager-->
+    <!--android:id="@+id/yearPager_activity_calendar"-->
+    <!--android:layout_below="@id/relativeLayout"-->
+    <!--android:background="@color/white"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginStart="15dp"-->
+    <!--android:layout_marginLeft="15dp"-->
+    <!--android:layout_marginEnd="15dp"-->
+    <!--android:layout_marginRight="15dp"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:layout_marginBottom="30dp"-->
+    <!--android:visibility="gone">-->
+
+    <!--</com.example.maxcalendar.calendar.YearCalendarPager>-->
+
+    <!--</RelativeLayout>-->

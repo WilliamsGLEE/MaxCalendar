@@ -48,7 +48,6 @@ public class YearRvView extends RecyclerView {
     public void init(Context context) {
         mYearRvAdapter = new YearRvAdapter(mAttrs, mYCalendarPainter);
         setLayoutManager(new GridLayoutManager(context, 3));
-        setAdapter(mYearRvAdapter);
         mYearRvAdapter.setOnRecyclerViewListener(new OnClickRvListener() {
             @Override
             public void onItemClick(int position) {
@@ -71,6 +70,7 @@ public class YearRvView extends RecyclerView {
 
             }
         });
+        setAdapter(mYearRvAdapter);
     }
 
     // 对 RecyclerView 添加月份数据

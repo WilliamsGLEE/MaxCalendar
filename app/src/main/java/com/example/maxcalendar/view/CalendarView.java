@@ -12,6 +12,7 @@ import com.example.maxcalendar.constant.Constant;
 import com.example.maxcalendar.painter.IMWPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.DateUtil;
+import com.example.maxcalendar.util.OtherUtil;
 
 import org.joda.time.LocalDate;
 
@@ -139,9 +140,19 @@ public abstract class CalendarView extends View implements View.OnClickListener 
     }
 
     // 获取每个元素矩形
+//    private Rect getRect(int row, int column) {
+//        this.mItemWidth = getMeasuredWidth() / 7;
+//        return new Rect(mItemWidth * column, mItemHeight * row, mItemWidth * (column + 1), mItemHeight * (row + 1));
+//    }
+
     private Rect getRect(int row, int column) {
-        this.mItemWidth = getMeasuredWidth() / 7;
-        return new Rect(mItemWidth * column, mItemHeight * row, mItemWidth * (column + 1), mItemHeight * (row + 1));
+        this.mItemWidth = (getMeasuredWidth() - OtherUtil.pxToDp(getContext(), 8) * 2) / 7;
+//        if (column == 0) {
+//            return new Rect(mItemWidth * column, mItemHeight * row, mItemWidth * (column + 1), mItemHeight * (row + 1));
+//        }
+
+        return new Rect(mItemWidth * column + OtherUtil.pxToDp(getContext(), 8),
+                mItemHeight * row, mItemWidth * (column + 1) + OtherUtil.pxToDp(getContext(), 8), mItemHeight * (row + 1));
     }
 
     // 选中的日期到顶部的距离

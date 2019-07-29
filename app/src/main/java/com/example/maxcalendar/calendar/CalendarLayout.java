@@ -23,6 +23,8 @@ import com.example.maxcalendar.painter.MWCalendarPainter;
 import com.example.maxcalendar.util.Attrs;
 import com.example.maxcalendar.util.AttrsUtil;
 import com.example.maxcalendar.util.DateUtil;
+import com.example.maxcalendar.util.OtherUtil;
+import com.orhanobut.logger.Logger;
 
 import org.joda.time.LocalDate;
 
@@ -122,16 +124,24 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         int paddingLeft = getPaddingLeft();
         int paddingRight = getPaddingRight();
 
+//        int mwpaddingLeft = OtherUtil.dpToPx(getContext(), 8);
+//        int mwpaddingRight = OtherUtil.dpToPx(getContext(), 8);
+
         if (mIsFirstLayout) {
             mMonthHeight = mMCalendarPager.getLayoutParams().height;
             mIsFirstLayout = false;
         }
 
+//        mWCalendarPager.layout(0 + paddingLeft + mwpaddingLeft, 0, measuredWidth - paddingRight - mwpaddingRight, mWeekHeight);
+//        mMCalendarPager.layout(0 + paddingLeft + mwpaddingLeft, 0, measuredWidth - paddingRight - mwpaddingRight, mMonthHeight);
+
         mWCalendarPager.layout(0 + paddingLeft, 0, measuredWidth - paddingRight, mWeekHeight);
         mMCalendarPager.layout(0 + paddingLeft, 0, measuredWidth - paddingRight, mMonthHeight);
 
         if (!mIsSelectDifHeightMonInWeek) {        // 周模式下选择另外一个高度不同的月，不同的mMonthHeight会导致mContentView的layout高度不同，要通过gestureMove来设置才能流畅滑动
-            mContentView.layout(0 + paddingLeft, mMonthHeight, measuredWidth - paddingRight, mContentView.getMeasuredHeight() + mMonthHeight);
+//            mContentView.layout(0 + paddingLeft, mMonthHeight, measuredWidth - paddingRight, mContentView.getMeasuredHeight() + mMonthHeight);
+            mContentView.layout(0, mMonthHeight, measuredWidth, mContentView.getMeasuredHeight() + mMonthHeight);
+
             mIsSelectDifHeightMonInWeek = false;
         }
     }
@@ -227,7 +237,7 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         }
     }
 
-    protected void setWeekVisible() {
+    public void setWeekVisible() {
         if (isChildWeekState()) {
             if (mWCalendarPager.getVisibility() != VISIBLE) {
                 mWCalendarPager.setVisibility(VISIBLE);
@@ -286,7 +296,7 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         mChildViewValueAnimator.start();
     }
 
-    protected void gestureMove(int dy, int[] consumed) {
+    public void gestureMove(int dy, int[] consumed) {
 
         float monthCalendarY = mMCalendarPager.getY();      // 先获取各自的Y坐标
         float childLayoutY = mContentView.getY();           // 周模式下月份切换，mContentView.getY已经改变
@@ -439,7 +449,9 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
     @Override
     public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
         // 只有都在都在周状态下，才允许子View Fling滑动
+        Logger.d("TTTESTTT onNestedPreFling " + isChildWeekState() + " , " + isMonthCalendarWeekState() + " , " + !(isChildWeekState() && isMonthCalendarWeekState()));
         return !(isChildWeekState() && isMonthCalendarWeekState());
+
     }
 
     @Override
@@ -543,6 +555,25 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
 
     public LocalDate getSelectDate() {
         return mMCalendarPager.getSelectedDate();
+    }
+
+    public void refreshDailyTask() {
+        mMCalendarPager.refreshSchemeList();
+        mWCalendarPager.refreshSchemeList();
+    }
+
+    public void refreshContentY() {
+//        float monthCalendarY = mMCalendarPager.getY();      // 先获取各自的Y坐标
+//        mMCalendarPager.setY(monthCalendarY);
+//        float childLayoutY = mContentView.getY();           // 周模式下月份切换，mContentView.getY已经改变
+//        mContentView.setY(childLayoutY);         // 900.0 -> 197.0 变正常，说明错误不在此
+
+//        Logger.d("TTESTT : " + STATE);
+//        if (STATE == STATE_MONTH) {
+//            gestureMove(-1, null);
+//        } else {
+//            gestureMove(-1, null);
+//        }
     }
 
 }

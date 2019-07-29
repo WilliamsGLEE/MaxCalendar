@@ -86,25 +86,18 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         if (mDataList.size() == 0) {
             if (mNoneView != null) {
-                //显示noneView
+                // 显示noneView
                 return TYPE_NONE;
             }
-        } else if (mFooterView == null) {
-            //普通item
+        } else if (position != getItemCount() - 1) {
+            // 普通item
             return TYPE_NORMAL;
-        } else if (position == getItemCount() - 1 && mFooterView != null) {
-            //最后一个,应该加载Footer
-            return TYPE_FOOTER;
         }
-        return TYPE_NORMAL;
+        return TYPE_FOOTER;
     }
 
     @Override
     public int getItemCount() {
-        if (mDataList.size() == 0) {
-            // 当 normal item 的数量为0时，若有 noneView，则显示 noneView
-            return mNoneView != null ? 1 : 0;
-        }
         return mDataList.size() + (mFooterView == null ? 0 : 1);
     }
 
@@ -112,7 +105,6 @@ public abstract class BaseRvAdapter<T> extends RecyclerView.Adapter {
     public void setOnRecyclerViewListener(OnClickRvListener onClickRvListener) {
         mOnClickRvListener = onClickRvListener;
     }
-
 
     public abstract class BaseRvHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {

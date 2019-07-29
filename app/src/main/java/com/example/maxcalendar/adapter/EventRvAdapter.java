@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.maxcalendar.R;
 import com.example.maxcalendar.bean.DailyTask;
 import com.example.maxcalendar.util.OtherUtil;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 
@@ -21,7 +22,7 @@ public class EventRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapte
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType == TYPE_FOOTER) {
+        if (viewType == TYPE_FOOTER || viewType == TYPE_NONE) {
             return new EventRvHolder(getFooterView());
         }
         return new EventRvHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_activity_calendar, parent, false));
@@ -39,7 +40,6 @@ public class EventRvAdapter extends com.example.maxcalendar.adapter.BaseRvAdapte
         @BindView(R.id.tv_color_item_rv_activity_calendar) TextView colorText;
         @BindView(R.id.tv_time_item_rv_activity_calendar) TextView timeText;
         @BindView(R.id.tv_title_item_rv_activity_calendar) TextView titleText;
-
 
         public EventRvHolder(View itemView) {
             super(itemView);

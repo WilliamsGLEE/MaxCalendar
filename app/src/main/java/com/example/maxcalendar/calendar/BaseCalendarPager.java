@@ -264,4 +264,9 @@ public abstract class BaseCalendarPager extends ViewPager implements ICalendar {
     public IMWPainter getCalendarPainter() {
         return mIMWPainter;
     }
+
+    protected void refreshSchemeList() {
+        mSchemeDateList = mGreenDaoHelper.queryAll();
+        mBaseCalendarAdapter.notifyDataSetChanged();
+    }
 }
