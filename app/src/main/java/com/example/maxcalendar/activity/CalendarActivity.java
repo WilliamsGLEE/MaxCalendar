@@ -106,7 +106,7 @@ public class CalendarActivity extends AppCompatActivity {
 
                 mCalendarLayout.jumptoADate(new LocalDate(year, month, 1));
                 mYearPager.setVisibility(View.GONE);
-                mCalendarLayout.showOtherPager();
+//                mCalendarLayout.showOtherPager();
                 mYearTextView.setVisibility(View.VISIBLE);
                 mLunarTextView.setVisibility(View.VISIBLE);
             }
