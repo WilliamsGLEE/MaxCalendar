@@ -548,9 +548,19 @@ public class CalendarLayout extends FrameLayout implements ICalendar, NestedScro
         mWCalendarPager.setVisibility(GONE);
     }
 
-    public void showOtherPager() {
-        mMCalendarPager.setVisibility(VISIBLE);
-        mWCalendarPager.setVisibility(INVISIBLE);
+    public void showMWPager() {
+//        mMCalendarPager.setVisibility(VISIBLE);
+//        mWCalendarPager.setVisibility(INVISIBLE);
+        if (STATE == STATE_WEEK) {
+            STATE = STATE_MONTH;
+            mWCalendarPager.setVisibility(INVISIBLE);
+            mMCalendarPager.setVisibility(VISIBLE);
+            LocalDate pivot = mMCalendarPager.getSelectedDate();
+            mWCalendarPager.jumpDate(pivot, false);
+        } else {
+            mMCalendarPager.setVisibility(VISIBLE);
+            mWCalendarPager.setVisibility(INVISIBLE);
+        }
     }
 
     public LocalDate getSelectDate() {
